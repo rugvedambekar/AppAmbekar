@@ -49,7 +49,7 @@ public class LibrariesFragment extends BaseAsyncFragment implements HeaderConten
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
-        if (isVisibleToUser) mHCV_libraries.onVisibleSetup();
+        if (isVisibleToUser) mHCV_libraries.initializeOnVisible();
     }
 
     @Override

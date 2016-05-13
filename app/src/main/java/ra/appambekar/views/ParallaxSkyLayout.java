@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
+import android.view.ViewTreeObserver.OnScrollChangedListener;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
@@ -35,6 +36,7 @@ public class ParallaxSkyLayout extends RelativeLayout {
     private ArrayList<ParallaxImageView> mCloudViews = new ArrayList<>();
 
     private ScrollView mScrollView = null;
+    private OnScrollChangedListener mScrollListener = null;
 
     public ParallaxSkyLayout(Context context) {
         super(context);
@@ -46,7 +48,7 @@ public class ParallaxSkyLayout extends RelativeLayout {
         super(context, attrs, defStyleAttr);
     }
 
-    public void build(BuildObserver observer) {
+    public void buildSky(BuildObserver observer) {
         mCol_daySky = getResources().getColor(R.color.sky_day);
         mCol_nightSky = getResources().getColor(R.color.sky_night);
 
@@ -54,14 +56,27 @@ public class ParallaxSkyLayout extends RelativeLayout {
 
         new BuildParallaxTask().execute(observer);
     }
-    public void destroy() {
+    public void destroySky() {
         // Deallocate all memory used by Clouds
         for (ParallaxImageView cloudView : mCloudViews) cloudView.destroy();
     }
 
+    public void destroyView() {
+        if (mScrollView != null && mScrollListener != null) {
+            mScrollView.getViewTreeObserver().removeOnScrollChangedListener(mScrollListener);
+            mScrollListener = null;
+            mScrollView = null;
+        }
+
+        mSunView = null;
+        mMoonView = null;
+        mCloudViews.clear();
+
+        removeAllViews();
+    }
     public void registerScrollView(ScrollView scrollView) {
         mScrollView = scrollView;
-        mScrollView.getViewTreeObserver().addOnScrollChangedListener(new ViewTreeObserver.OnScrollChangedListener() {
+        mScrollView.getViewTreeObserver().addOnScrollChangedListener(mScrollListener = new OnScrollChangedListener() {
 
             float maxScrollY = 0;
 

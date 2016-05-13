@@ -45,6 +45,8 @@ public class AndroidFragment extends BaseAsyncFragment {
         mTabStrip.setDividerColorResource(R.color.toolbar_light);
         mTabStrip.setShouldExpand(true);
 
+
+
         return rootView;
     }
 

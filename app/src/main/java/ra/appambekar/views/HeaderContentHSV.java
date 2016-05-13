@@ -41,7 +41,6 @@ public class HeaderContentHSV extends LinearLayout implements View.OnClickListen
     private int mTextCol_on, mTextCol_off;
 
     private Rect scrollBounds = new Rect();
-    private int scrollXY[] = new int[2];
 
     private ContentObserver mObserver;
 
@@ -85,15 +84,14 @@ public class HeaderContentHSV extends LinearLayout implements View.OnClickListen
         mHSV_content.getViewTreeObserver().addOnScrollChangedListener(mContentScrollListener);
     }
 
-    public void onVisibleSetup() {
+    public void initializeOnVisible() {
         mHSV_content.getHitRect(scrollBounds);
-        mHSV_content.getLocationOnScreen(scrollXY);
+        if (mLastSelected == null && switchOn(mFirstViews.get(0)) && mObserver != null) {
+            mObserver.onClick((SmartTextView) mFirstViews.get(0));
+        }
 
+        Log.d(TAG, String.format("ScrollBounds=(l=%d,r=%d), ScrollView=(l=%d,r=%d)", scrollBounds.left, scrollBounds.right, mHSV_content.getLeft(), mHSV_content.getRight()));
         cleanHeaderViews();
-
-        if (mLastSelected == null && switchOn(mFirstViews.get(0)) && mObserver != null) mObserver.onClick((SmartTextView) mFirstViews.get(0));
-
-        Log.d(TAG, "GlobalLayout :: scrollBounds=" + scrollBounds.toString() + " scrollX=" + scrollXY[0]);
     }
 
     public void setContentObserver(ContentObserver observer) { mObserver = observer; }
@@ -138,13 +136,12 @@ public class HeaderContentHSV extends LinearLayout implements View.OnClickListen
         for (View view : mFirstViews) {
             View headerView = (View) view.getTag();
 
-            if (view.getLocalVisibleRect(scrollBounds)) {
-                int viewXY[] = new int[2];
-
-                view.getLocationOnScreen(viewXY);
-                headerView.setX(viewXY[0] - scrollXY[0]);
+            if (view.getX() >= mHSV_content.getLeft() && view.getX() < mHSV_content.getRight()) {
+                headerView.setX(view.getX());
                 headerView.setTag(true);
                 headerView.setAlpha(1);
+
+                Log.d(TAG, "Adding Header: " + ((TextView) headerView).getText() + " @ " + view.getX());
 
             } else {
                 headerView.setTag(false);
@@ -204,6 +201,7 @@ public class HeaderContentHSV extends LinearLayout implements View.OnClickListen
     private ViewTreeObserver.OnScrollChangedListener mContentScrollListener = new ViewTreeObserver.OnScrollChangedListener() {
 
         private int lastScrollPos = 0;
+        private Rect viewVisRect = new Rect();
 
         @Override
         public void onScrollChanged() {
@@ -222,17 +220,19 @@ public class HeaderContentHSV extends LinearLayout implements View.OnClickListen
             if (firstHeaderView != null && !(boolean) firstHeaderView.getTag()) firstHeaderView = null;
 
             for (int i = visibleViewIndex; i < mFirstViews.size(); i++) {
-                int viewXY[] = new int[2];
                 View contentView = mFirstViews.get(i);
                 View headerView = (View) contentView.getTag();
 
                 // If first ContentView of the group is showing on screen
                 if (contentView.getLocalVisibleRect(scrollBounds)) {
-                    contentView.getLocationOnScreen(viewXY);
+                    contentView.getLocalVisibleRect(viewVisRect);
+
+//                    Log.d(TAG, String.format("%s :: ViewVisRect=(l=%d,r=%d) HeaderX=%d", ((TextView) contentView).getText(), viewVisRect.left, viewVisRect.right, (int)contentView.getX() - lastScrollPos));
 
                     // Align HeaderView with ContentView
-                    if (viewXY[0] >= scrollXY[0]) headerView.setX(viewXY[0] - scrollXY[0]);
-                    else if (viewXY[0] < scrollXY[0]) headerView.setX(0);
+                    if (viewVisRect.left > 0) headerView.setX(0);
+                    else headerView.setX((int)contentView.getX() - lastScrollPos);
+
                     headerView.setTag(true);
                     headerView.setAlpha(1);
 

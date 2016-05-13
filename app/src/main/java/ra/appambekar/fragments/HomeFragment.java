@@ -1,7 +1,6 @@
 package ra.appambekar.fragments;
 
 
-import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -19,7 +18,6 @@ import ra.appambekar.views.ParallaxSkyLayout;
 public class HomeFragment extends Fragment {
 
     private ParallaxSkyLayout mParallaxSky;
-    private ScrollView mScrollContainer;
 
     private boolean mScrollLocked;
 
@@ -30,10 +28,10 @@ public class HomeFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_home, container, false);
 
         mParallaxSky = (ParallaxSkyLayout) rootView.findViewById(R.id.pl_background);
-        mScrollContainer = (ScrollView) rootView.findViewById(R.id.scrollContainer_intro);
+        ScrollView scrollContainer = (ScrollView) rootView.findViewById(R.id.scrollContainer_intro);
 
-        mParallaxSky.registerScrollView(mScrollContainer);
-        mScrollContainer.setOnTouchListener(new View.OnTouchListener() {
+        mParallaxSky.registerScrollView(scrollContainer);
+        scrollContainer.setOnTouchListener(new View.OnTouchListener() {
             @Override public boolean onTouch(View v, MotionEvent event) {
                 return mScrollLocked;
             }
@@ -45,16 +43,22 @@ public class HomeFragment extends Fragment {
     }
 
     @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        mParallaxSky.destroyView();
+    }
+
+    @Override
     public void onStop() {
         super.onStop();
-        mParallaxSky.destroy();
+        mParallaxSky.destroySky();
         mScrollLocked = true;
     }
 
     @Override
     public void onStart() {
         super.onStart();
-        mParallaxSky.build(new ParallaxSkyLayout.BuildObserver() {
+        mParallaxSky.buildSky(new ParallaxSkyLayout.BuildObserver() {
             @Override public void onComplete() {
                 mScrollLocked = false;
             }

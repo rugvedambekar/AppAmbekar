@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="IconListItem">
+        <attr name="iconSrc" format="reference"/>
+        <attr name="contentSrc" format="reference"/>
+        <attr name="itemType" format="enum">
+            <enum name="light" value="0"/>
+            <enum name="heavy" value="1"/>
+        </attr>
+    </declare-styleable>
+
+    <declare-styleable name="HiddenView">
+        <attr name="viewTitle" format="string"/>
+        <attr name="hintMargin" format="dimension"/>
+        <attr name="viewPadding" format="dimension"/>
+    </declare-styleable>
+
+    <declare-styleable name="IntroductionLayout">
+        <attr name="introHeading" format="string"/>
+        <attr name="intro" format="string"/>
+        <attr name="justifyIntro" format="boolean"/>
+    </declare-styleable>
+
+</resources>

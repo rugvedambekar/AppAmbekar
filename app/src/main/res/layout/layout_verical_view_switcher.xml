@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/square_border">
+
+    <LinearLayout
+        android:id="@+id/ll_aboveXp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/square_border_dash"
+        android:padding="5dp">
+
+        <ImageView
+            android:id="@+id/arrow_aboveXp"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:padding="2dp"
+            android:alpha="0.5"
+            android:src="@drawable/ic_arrow_upward"/>
+
+        <ra.smarttextview.SmartTextView
+            android:id="@+id/tv_aboveXp"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="10dp"
+            android:gravity="left"
+            android:textSize="12dp"
+            app:font="reg"/>
+
+    </LinearLayout>
+
+    <ViewFlipper
+        android:id="@+id/vf_xpFlipper"
+        android:foregroundGravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="0dip"
+        android:layout_weight="1"
+        android:layout_margin="1dp"
+        android:padding="15dp"/>
+
+    <LinearLayout
+        android:id="@+id/ll_belowXp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/square_border_dash"
+        android:padding="5dp">
+
+        <ra.smarttextview.SmartTextView
+            android:id="@+id/tv_belowXp"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="10dp"
+            android:gravity="right"
+            android:textSize="12dp"
+            app:font="reg"/>
+
+        <ImageView
+            android:id="@+id/arrow_belowXp"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:padding="2dp"
+            android:alpha="0.5"
+            android:src="@drawable/ic_arrow_downward"/>
+
+    </LinearLayout>
+
+</LinearLayout>

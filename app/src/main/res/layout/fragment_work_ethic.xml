@@ -1,0 +1,24 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="ra.appambekar.fragments.qualifications.WorkEthicFragment"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    style="@style/FragmentSpacing">
+
+    <ra.appambekar.views.IntroductionLayout
+        android:id="@+id/we_introduction"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:introHeading="@string/we_heading"
+        app:intro="@string/we_intro"/>
+
+    <include layout="@layout/layout_scroller"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/we_introduction"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="30dp"/>
+
+</RelativeLayout>

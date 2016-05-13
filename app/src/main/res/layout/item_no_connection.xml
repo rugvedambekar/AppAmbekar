@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingTop="15dp"
+    android:paddingLeft="15dp"
+    android:paddingRight="25dp">
+
+    <LinearLayout
+        android:id="@+id/ll_noConnection"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="10dp">
+
+        <ImageView
+            android:id="@+id/iv_noConnection"
+            android:layout_width="@dimen/nav_menu_item_icon_size"
+            android:layout_height="@dimen/nav_menu_item_icon_size"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="10dp"
+            android:src="@drawable/ic_network"/>
+
+        <ra.smarttextview.SmartTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:gravity="center"
+            android:singleLine="true"
+            android:ellipsize="middle"
+            android:textColor="@android:color/holo_red_light"
+            android:text="@string/m_no_connection"
+            android:textSize="18sp"
+            app:font="reg"/>
+
+    </LinearLayout>
+
+    <ra.smarttextview.SmartTextView
+        android:id="@+id/tv_noConnectionInfo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:text="@string/m_no_connection_info"
+        android:textColor="@color/toolbar_light"
+        android:textSize="12sp"
+        app:justified="true"
+        app:font="reg"/>
+
+    <ra.smarttextview.SmartTextView
+        android:id="@+id/tv_noConnectionApps"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="3dp"
+        android:paddingLeft="10dp"
+        android:text="@string/m_no_connection_work"
+        android:textSize="12sp"
+        android:textColor="@color/toolbar_light"
+        android:textStyle="bold"
+        app:font="reg"/>
+
+</LinearLayout>

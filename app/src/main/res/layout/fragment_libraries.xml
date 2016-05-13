@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ra.smarttextview.SmartTextView
+        android:id="@+id/tv_librariesIntro"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/a_libraries_intro"
+        android:layout_marginBottom="15dp"
+        android:textSize="15sp"
+        app:justified="true"
+        app:font="thin"/>
+
+    <ra.appambekar.views.HeaderContentHSV
+        android:id="@+id/hcv_libraries"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dip"
+        android:layout_weight="1">
+
+        <ra.smarttextview.SmartTextView
+            android:id="@+id/tv_libraryInfo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textColor="@color/toolbar_dark_med"
+            android:textStyle="italic"
+            android:padding="30dp"
+            android:textSize="16sp"
+            app:justified="true"
+            app:font="reg"/>
+
+    </FrameLayout>
+
+</LinearLayout>

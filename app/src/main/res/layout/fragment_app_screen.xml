@@ -1,0 +1,27 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="ra.appambekar.fragments.apps.AppScreenFragment"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.android.volley.toolbox.NetworkImageView
+        android:id="@+id/niv_screen"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="fitCenter"/>
+
+    <ra.smarttextview.SmartTextView
+        android:id="@+id/tv_screenTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/toolbar_dark_high"
+        android:textColor="@android:color/white"
+        android:textSize="22sp"
+        android:gravity="center"
+        android:padding="10dp"
+        android:textStyle="bold"
+        app:font="reg"/>
+
+</RelativeLayout>

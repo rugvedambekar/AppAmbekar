@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="toolbar_main">#565656</color>
+    <color name="toolbar_main_dark">#464646</color>
+
+    <color name="toolbar_light">#A6A6A6</color>
+
+    <color name="toolbar_dark">#363636</color>
+    <color name="toolbar_dark_low">#33363636</color>
+    <color name="toolbar_dark_med">#66363636</color>
+    <color name="toolbar_dark_high">#DD363636</color>
+
+    <color name="toolbar_med">#767676</color>
+
+    <color name="lightest_blue_gray">#ECEFF1</color>
+    <color name="light_blue_gray">#CFD8DC</color>
+
+    <color name="text_light">#B6B6B6</color>
+    <color name="text_bright">#FFFDE7</color>
+
+    <color name="sky_day">#33b5e5</color>
+    <color name="sky_night">#0D2F3C</color>
+
+</resources>

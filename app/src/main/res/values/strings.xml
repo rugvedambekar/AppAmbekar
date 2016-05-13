@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">AppAmbekar</string>
+    <string name="main_header">Rugved Ambekar</string>
+    <string name="main_menu">Main Menu</string>
+    <string name="action_example">Example action</string>
+    <string name="action_settings">Settings</string>
+    <string name="default_hidden_view_tag">View Hidden Content</string>
+    <string name="heading_app_screens">Application Screens:</string>
+    <string name="back_notification">PRESS BACK AGAIN TO EXIT</string>
+    <string name="link_google_play">View in Google Play Store</string>
+    <string name="link_google_play_na">Not Available in Google Play Store</string>
+
+    <!-- Menu Items -->
+    <string name="m_home">Home</string>
+    <string name="m_qualifications">My Qualifications</string>
+    <string name="m_apps">My Android Apps</string>
+    <string name="m_work">My Completed Work</string>
+    <string name="m_more_work">All Other Apps</string>
+    <string name="m_no_connection">Not Connected!</string>
+    <string name="m_no_connection_info">Please connect to the internet to view my past work, which includes:</string>
+    <string name="m_no_connection_work">Univision Deportes\nLiving Spaces\nAuluxa</string>
+
+    <!--Introduction-->
+    <string name="i_heading">Introduction</string>
+    <string name="i_sub_heading">~ An app to present myself</string>
+    <string name="i_intro">As an Android developer, what better way to show you who I am and what I do than through an app! Here is a little bit about me and why I do what I do:</string>
+    <string name="i_software_title">Why Software?</string>
+    <string name="i_software_content">Software is the coolest and fastest way to bring an idea to life. I made my first game in Grade 10 using Turing, and have pretty much been hooked ever since.</string>
+    <string name="i_apps_title">Why Apps?</string>
+    <string name="i_apps_content">Apps are the most personal way to reach a user… they live in peoples\' pockets! Me any pretty much everyone I know can’t get enough apps, so I couldn’t help but want to make some good ones.</string>
+    <string name="i_android_title">Why Android?</string>
+    <string name="i_android_content">I love the fact that Android provides beautiful experiences on so many different phones, and gives developers a means of reaching such a vast, international audience.</string>
+    <string name="i_remote_title">Why Remote?</string>
+    <string name="i_remote_content">It took me some time before realizing remote work was for me… but now I know that I need the freedom to travel, work on my schedule and go beyond the standard 9–5 job!</string>
+
+    <!-- Qualifications -->
+    <string name="q_communication">Impeccable Communication</string>
+    <string name="q_experience">Broad Industry Experience</string>
+    <string name="q_workethic">Exceptional Work Ethic</string>
+    <string name="q_products">High Value Products</string>
+
+    <!-- Android -->
+    <string name="a_development">My Development Process</string>
+    <string name="a_libraries">My Favorite Libraries</string>
+
+    <!-- Communication -->
+    <string name="c_english">Am a native English speaker who has been talking code since age 13.</string>
+    <string name="c_convey">Convey complicated technical matters to developers and non-technical associates.</string>
+    <string name="c_connected">Am connected at all times; through Skype, email and even directly via cell phone.</string>
+
+    <!-- Experience -->
+    <string name="xp_heading">Submerged in Software!</string>
+    <string name="xp_intro">With over 5 years in the industry, I\'ve gained valuable experience and insight into how we use software to solve our world\'s problems.</string>
+    <string name="xp_applications">Application Types</string>
+    <string name="xp_applications_tag">I\'ve worked on</string>
+
+    <string-array name="xp_applications_list">
+        <item>Desktop Apps</item>
+        <item>Web/Cloud Apps</item>
+        <item>SmartPhone Apps</item>
+    </string-array>
+
+    <array name="xp_applications_imgs">
+        <item>@drawable/ic_desktop</item>
+        <item>@drawable/ic_cloud</item>
+        <item>@drawable/ic_phone</item>
+    </array>
+
+    <string name="xp_verticals">Industry Verticals</string>
+    <string name="xp_verticals_tag">I\'ve contributed to</string>
+
+    <string-array name="xp_verticals_list">
+        <item>Information Technology</item>
+        <item>Finance</item>
+        <item>HealthCare</item>
+        <item>Entertainment</item>
+        <item>Retail</item>
+    </string-array>
+
+    <array name="xp_verticals_imgs">
+        <item>@drawable/ic_infotech</item>
+        <item>@drawable/ic_finance</item>
+        <item>@drawable/ic_healthcare</item>
+        <item>@drawable/ic_entertainment</item>
+        <item>@drawable/ic_retail</item>
+    </array>
+
+    <string name="xp_entities">Business Entities</string>
+    <string name="xp_entities_tag">I\'ve interfaced with</string>
+
+    <string-array name="xp_entities_list">
+        <item>Design &amp; Dev Teams</item>
+        <item>Quality Assurance</item>
+        <item>User Testing Groups</item>
+        <item>Senior Management</item>
+        <item>Clients Representatives</item>
+    </string-array>
+
+    <array name="xp_entities_imgs">
+        <item>@drawable/ic_developer</item>
+        <item>@drawable/ic_qa</item>
+        <item>@drawable/ic_test_group</item>
+        <item>@drawable/ic_management</item>
+        <item>@drawable/ic_client</item>
+    </array>
+
+    <string name="xp_organizations">Organizations</string>
+    <string name="xp_organizations_tag">I\'ve excelled at</string>
+
+    <string-array name="xp_organizations_list">
+        <item>Royal Bank of Canada</item>
+        <item>Agilent Technologies</item>
+        <item>Digiflare</item>
+        <item>Clearbridge Mobile</item>
+        <item>IBM</item>
+    </string-array>
+
+    <array name="xp_organizations_imgs">
+        <item>@drawable/ic_rbc</item>
+        <item>@drawable/ic_agilent</item>
+        <item>@drawable/ic_digiflare</item>
+        <item>@drawable/ic_clearbridge</item>
+        <item>@drawable/ic_ibm</item>
+    </array>
+
+    <!-- Work Ethic -->
+    <string name="we_heading">Surpassing Expectations!</string>
+    <string name="we_intro">I set very high working standards for myself, remain adaptable to shifting business needs and do whatever it takes to get the job done.</string>
+    <string name="we_conditions">Conditions</string>
+    <string name="we_conditions_pre">Work under your</string>
+    <string name="we_conditions_content1">absorb an existing code base</string>
+    <string name="we_conditions_content2">build one from the ground up</string>
+    <string name="we_environment">Environment</string>
+    <string name="we_environment_pre">Work with your</string>
+    <string name="we_environment_content1">collaborate with your teams</string>
+    <string name="we_environment_content2">work fully independently</string>
+    <string name="we_requirements">Requirements</string>
+    <string name="we_requirements_pre">Work off your</string>
+    <string name="we_requirements_content1">extend and build off general requirements</string>
+    <string name="we_requirements_content2">work with detailed specs and style guides</string>
+    <string name="we_deadlines">Deadlines</string>
+    <string name="we_deadlines_pre">Work under your</string>
+    <string name="we_deadlines_content1">utilize my own time when possible</string>
+    <string name="we_deadlines_content2">work extreme overtime hours</string>
+    <string name="we_problems">Problems</string>
+    <string name="we_problems_pre">Work on your</string>
+    <string name="we_problems_content1">apply the best known solutions</string>
+    <string name="we_problems_content2">learn new technologies to apply better ones</string>
+
+    <!-- My Android -->
+    <string name="a_heading">Maximizing Android!</string>
+    <string name="a_intro">I strive to create the best experience Android has to offer by building completely native apps the way they are supposed to be built!</string>
+    <string name="a_google">I work strictly with Google tools and guidelines to produce native Android apps.</string>
+    <string name="a_android">I refine the user experience based on Android UI Design Principles for all screen sizes.</string>
+    <string name="a_opensource">I utilize the open-source Android ecosystem with 3rd party library integration.</string>
+    <string name="a_extend">I can extend an Android app with real-time backend services like Firebase &amp; Parse.</string>
+    <string name="a_analytics">Integrating Google Analytics to track and leverage usage and user interaction data.</string>
+    <string name="a_ship">Finally I can ship the final product onto the Google Play Store.</string>
+    <string name="a_libraries_intro">I never stop exploring the open-source world for great libraries to use; here are the ones I have worked with so far:</string>
+    <string name="a_libraries_hint">Select a library to learn a little bit about it!</string>
+
+    <string name="a_networking">Networking</string>
+    <string-array name="a_networking_libs">
+        <item>Volley</item>
+        <item>Retrofit</item>
+        <item>Picasso</item>
+    </string-array>
+    <string-array name="a_networking_libs_info">
+        <item>Google\'s HTTP library that makes networking for Android apps easier and most importantly, faster.</item>
+        <item>A type-safe REST client for Android which intelligently maps an API into a client interface using annotations.</item>
+        <item>A powerful image downloading and caching library for Android that will abstract the complexity behind an easy to use DSL.</item>
+    </string-array>
+
+    <string name="a_application">Application Core</string>
+    <string-array name="a_application_libs">
+        <item>EventBus</item>
+        <item>RoboGuice</item>
+        <item>AndroidAnnotations</item>
+    </string-array>
+    <string-array name="a_application_libs_info">
+        <item>An event bus created for easier, simpler inter-component communication in Android apps, especially between Activities, Fragments, and threads.</item>
+        <item>Powerful extensions to Android that allow developers to inject dependencies for views, resources, system services, and any other objects.</item>
+        <item>A framework that speeds up Android development and facilitates code maintenance by keeping syntax simple.</item>
+    </string-array>
+
+    <string name="a_storage">Internal Storage</string>
+    <string-array name="a_storage_libs">
+        <item>SQLBrite</item>
+        <item>Hawk</item>
+        <item>Poetry</item>
+    </string-array>
+    <string-array name="a_storage_libs_info">
+        <item>A lightweight wrapper around SQLiteOpenHelper which brings reactive stream semantics to SQL operations.</item>
+        <item>Secure Simple Key-Value Storage for Android that provides secure data persistence for any type.</item>
+        <item>An Android persistence library that allows you to persist a JSON object tree directly into an SQLite database through OrmLite.</item>
+    </string-array>
+
+    <string name="a_interface">Interface</string>
+    <string-array name="a_interface_libs">
+        <item>Android Bootstrap</item>
+        <item>AndroidPlot</item>
+        <item>Scissors</item>
+    </string-array>
+    <string-array name="a_interface_libs_info">
+        <item>An Android library which provides custom views and widgets styled according to the Twitter Bootstrap Specification.</item>
+        <item>A library for creating dynamic and static charts in your Android app, everything from scatter plots to candlestick charts.</item>
+        <item>An easy image cropping library developed by Lyft, with built-in support for Picasso, Glide or Universal Image Loader.</item>
+    </string-array>
+
+    <string name="a_testing">Testing</string>
+    <string-array name="a_testing_libs">
+        <item>Espresso</item>
+        <item>Robolectric</item>
+    </string-array>
+    <string-array name="a_testing_libs_info">
+        <item>A UI test framework (part of the Android Testing Support Library) that allows you to create automated UI tests for your Android app.</item>
+        <item>A unit testing framework that allows Android applications to be tested on the JVM without an emulator or device.</item>
+    </string-array>
+
+    <string name="title_activity_app_screen">AppScreenActivity</string>
+    <string name="hello_world">Hello world!</string>
+
+</resources>

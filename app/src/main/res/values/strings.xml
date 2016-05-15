@@ -30,7 +30,7 @@
     <string name="i_software_title">Why Software?</string>
     <string name="i_software_content">Software is the coolest and fastest way to bring an idea to life. I made my first game in Grade 10 using Turing, and have pretty much been hooked ever since.</string>
     <string name="i_apps_title">Why Apps?</string>
-    <string name="i_apps_content">Apps are the most personal way to reach a user… they live in peoples\' pockets! Me any pretty much everyone I know can’t get enough apps, so I couldn’t help but want to make some good ones.</string>
+    <string name="i_apps_content">Apps are the most personal way to reach a user… they live in peoples\' pockets! Me and pretty much everyone I know can’t get enough apps, so I couldn’t help but want to make some good ones.</string>
     <string name="i_android_title">Why Android?</string>
     <string name="i_android_content">I love the fact that Android provides beautiful experiences on such a range of devices, and gives developers a means of reaching such a vast, international audience.</string>
     <string name="i_remote_title">Why Remote?</string>
@@ -165,10 +165,10 @@
     <string name="a_heading">Maximizing Android!</string>
     <string name="a_intro">I strive to create the best experience Android has to offer by building completely native apps the way they are supposed to be built!</string>
     <string name="a_google">I work strictly with Google tools and guidelines to produce native Android apps.</string>
-    <string name="a_android">I refine the user experience based on Android UI Design Principles for all screen sizes.</string>
+    <string name="a_android">I refine the user experience based on Android UI Design Principles for phones and tablets.</string>
     <string name="a_opensource">I utilize the open-source Android ecosystem with 3rd party library integration.</string>
     <string name="a_extend">I can extend an Android app with real-time backend services like Firebase &amp; Parse.</string>
-    <string name="a_analytics">Integrating Google Analytics to track and leverage usage and user interaction data.</string>
+    <string name="a_analytics">I can integrate Google Analytics to track and leverage usage and user interaction data.</string>
     <string name="a_ship">Finally I can ship the final product onto the Google Play Store.</string>
     <string name="a_libraries_intro">I never stop exploring the open-source world for great libraries to use; here are the ones I have worked with so far:</string>
     <string name="a_libraries_hint">Select a library to learn a little bit about it!</string>

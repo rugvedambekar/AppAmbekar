@@ -44,7 +44,7 @@ I have integrated 2 external modules into my project: The SmartTextView & The Vi
 
 #### The SmartTextView
 
-This is a module I created myself, extending the stand Android TextView. 
+This is a module I created myself, extending the standard Android TextView. 
 The most notable feature it provides is the ability to justify text! A common method of rendering text that Android does not provide.
 It can also justify single words to span the entire width of the view.
 Additionally it can register 3 typefaces for font styles: Thin, Regular & Think. These can be directly set using XML attributes and simplify font management.

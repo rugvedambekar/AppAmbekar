@@ -1,18 +1,17 @@
 package ra.appambekar.adapters;
 
 import android.app.Activity;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.android.volley.toolbox.NetworkImageView;
 
+import ra.appambekar.AmbekarApplication;
 import ra.appambekar.R;
 import ra.appambekar.helpers.MenuHelper;
+import ra.appambekar.helpers.MenuHelper.MenuListener;
 import ra.appambekar.helpers.VolleyHelper;
 import ra.appambekar.models.MenuOption;
 import ra.appambekar.utilities.LayoutUtils;
@@ -21,7 +20,7 @@ import ra.smarttextview.SmartTextView;
 /**
  * Created by rugvedambekar on 2016-02-22.
  */
-public class MenuAdapter extends ArrayAdapter<MenuOption> {
+public class MenuAdapter extends ArrayAdapter<MenuOption> implements MenuListener {
 
     private LayoutInflater mInflater;
     private MenuHelper mMenuHelper;
@@ -31,6 +30,7 @@ public class MenuAdapter extends ArrayAdapter<MenuOption> {
 
         mInflater = context.getLayoutInflater();
         mMenuHelper = MenuHelper.getInstance();
+        mMenuHelper.loadMenu(this);
     }
 
     @Override
@@ -45,7 +45,7 @@ public class MenuAdapter extends ArrayAdapter<MenuOption> {
 
     @Override
     public int getPosition(MenuOption item) {
-        return item.getIndex();
+        return mMenuHelper.getOptions().indexOf(item);
     }
 
     @Override
@@ -53,7 +53,7 @@ public class MenuAdapter extends ArrayAdapter<MenuOption> {
         MenuOption mOption = getItem(position);
 
         if (mOption.isNoConnection()) {
-            return mInflater.inflate(R.layout.item_no_connection, null);
+            return mInflater.inflate(R.layout.item_no_connection_menu, null);
         }
 
         convertView = mInflater.inflate(R.layout.item_nav_menu, null);
@@ -83,5 +83,14 @@ public class MenuAdapter extends ArrayAdapter<MenuOption> {
     @Override
     public boolean isEnabled(int position) {
         return !getItem(position).isHeading();
+    }
+
+    public void refreshIfRequired() {
+        if (!mMenuHelper.hasDynamicMenu()) mMenuHelper.loadMenu(this);
+    }
+
+    @Override
+    public void onFullMenuLoaded() {
+        notifyDataSetChanged();
     }
 }

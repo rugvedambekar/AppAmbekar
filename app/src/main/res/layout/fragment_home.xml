@@ -124,11 +124,26 @@
             <ra.smarttextview.SmartTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="75dp"
                 android:textColor="@color/text_bright"
                 android:text="@string/i_remote_content"
                 android:textSize="18sp"
                 app:justified="true"
                 app:font="reg"/>
+
+            <ra.smarttextview.SmartTextView
+                android:id="@+id/tv_contact"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="30dp"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/rounded_button"
+                android:textColor="@color/text_bright"
+                android:text="@string/c_heading"
+                android:textSize="16sp"
+                android:padding="10dp"
+                app:font="thin"/>
+
 
         </LinearLayout>
 

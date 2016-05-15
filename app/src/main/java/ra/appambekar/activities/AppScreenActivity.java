@@ -6,12 +6,14 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
+import android.view.ViewTreeObserver;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 
 import ra.appambekar.R;
 import ra.appambekar.adapters.AppScreensAdapter;
+import ra.appambekar.fragments.apps.AppScreenFragment;
 import ra.appambekar.models.AppScreen;
 
 public class AppScreenActivity extends AppCompatActivity {
@@ -43,14 +45,6 @@ public class AppScreenActivity extends AppCompatActivity {
 
         mScreensPager.setAdapter(mScreensAdapter);
         mScreensPager.setCurrentItem(firstScreenIndex);
-        mScreensPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) { }
-            @Override public void onPageScrollStateChanged(int state) { }
-            @Override public void onPageSelected(int position) {
-                if (mScreensAdapter.getFragmentReference(position) != null) mScreensAdapter.getFragmentReference(position).toastTitle();
-            }
-
-        });
     }
 
     @Override

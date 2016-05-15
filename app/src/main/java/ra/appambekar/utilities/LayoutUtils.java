@@ -6,6 +6,8 @@ import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.Rect;
 import android.graphics.Typeface;
 import android.os.Build;
 import android.util.DisplayMetrics;
@@ -13,6 +15,7 @@ import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import ra.smarttextview.SmartTextView;
 
@@ -75,6 +78,30 @@ public class LayoutUtils {
         public static int GetMeasuredHeight(android.view.View view) {
             view.measure(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
             return view.getMeasuredHeight();
+        }
+
+        public static void AdjustTextSizeForWidth(TextView textView, int desiredWidth) {
+            Paint paint = new Paint();
+            Rect bounds = new Rect();
+
+            paint.setTypeface(textView.getTypeface());
+            float textSize = textView.getTextSize();
+            paint.setTextSize(textSize);
+            String text = textView.getText().toString();
+            paint.getTextBounds(text, 0, text.length(), bounds);
+
+            if (desiredWidth <= 0) {
+                desiredWidth = textView.getMeasuredWidth() - textView.getPaddingLeft() - textView.getPaddingRight();
+                if (desiredWidth <= 0) return;
+            }
+
+            while (bounds.width() > desiredWidth) {
+                textSize--;
+                paint.setTextSize(textSize);
+                paint.getTextBounds(text, 0, text.length(), bounds);
+            }
+
+            textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
         }
     }
 

@@ -18,13 +18,10 @@ import ra.appambekar.models.AppScreen;
 public class AppScreensAdapter extends FragmentPagerAdapter {
 
     private List<AppScreen> mAppScreens;
-    private HashMap<Integer, AppScreenFragment> mFragmentREFs;
 
     public AppScreensAdapter(FragmentManager manager, List<AppScreen> screens) {
         super(manager);
-
         mAppScreens = screens;
-        mFragmentREFs = new HashMap<>();
     }
 
     @Override
@@ -34,22 +31,7 @@ public class AppScreensAdapter extends FragmentPagerAdapter {
 
     @Override
     public AppScreenFragment getItem(int position) {
-        AppScreen thisScreen = mAppScreens.get(position);
-        mFragmentREFs.put(position, new AppScreenFragment().withAppScreen(thisScreen));
-
-        return mFragmentREFs.get(position);
-    }
-
-    @Override
-    public void destroyItem(ViewGroup container, int position, Object object) {
-        // Remove reference to maintain memory efficiency of adapter;
-        mFragmentREFs.remove(position);
-
-        super.destroyItem(container, position, object);
-    }
-
-    public AppScreenFragment getFragmentReference(int position) {
-        return mFragmentREFs.get(position);
+        return new AppScreenFragment().withAppScreen(mAppScreens.get(position));
     }
 
     @Override

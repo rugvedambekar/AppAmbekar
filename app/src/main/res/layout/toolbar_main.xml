@@ -7,12 +7,28 @@
     android:layout_height="?attr/actionBarSize"
     android:background="@color/toolbar_main_dark">
 
-    <ra.smarttextview.SmartTextView
-        android:id="@+id/toolbar_header"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@android:color/white"
-        android:textSize="24sp"
-        app:font="thin"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ra.smarttextview.SmartTextView
+            android:id="@+id/toolbar_header"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:textColor="@android:color/white"
+            android:textSize="24sp"
+            app:font="thin"/>
+
+        <ImageView
+            android:id="@+id/iv_logoContact"
+            android:layout_width="54dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_launcher_white"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="10dp"
+            android:padding="5dp"/>
+
+    </RelativeLayout>
 
 </ra.appambekar.views.RAToolbar>

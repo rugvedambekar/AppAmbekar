@@ -33,12 +33,10 @@ public class MenuHelper {
 
     private ArrayList<MenuOption> mAllOptions;
     private MenuOption mOtherWorkOption = null;
+    private boolean mHasDynamicMenu = false;
 
     private MenuHelper() {
         mAllOptions = new ArrayList<>();
-
-        loadStaticMenu();
-        loadDynamicMenu();
     }
 
     private void loadStaticMenu() {
@@ -48,8 +46,8 @@ public class MenuHelper {
         mAllOptions.add(new MenuOption(R.string.m_work).forHeading());
     }
 
-    private void loadDynamicMenu() {
-        if (!AmbekarApplication.hasActiveConnection()) {
+    private void loadDynamicMenu(final MenuListener menuListener) {
+        if (!(mHasDynamicMenu = AmbekarApplication.hasActiveConnection())) {
             mAllOptions.add(new MenuOption().forNoConnection());
 
         } else FirebaseHelper.getInstance().getChildREF(FireChild.AppProjects).addListenerForSingleValueEvent(new ValueEventListener() {
@@ -64,6 +62,7 @@ public class MenuHelper {
                 }
 
                 if (mOtherWorkOption != null) mAllOptions.add(mOtherWorkOption);
+                if (menuListener != null) menuListener.onFullMenuLoaded();
             }
 
             @Override
@@ -74,10 +73,20 @@ public class MenuHelper {
     }
 
     private void addOtherWork(AppInfo appInfo) {
-        if (mOtherWorkOption == null) mOtherWorkOption = new MenuOption(R.string.m_more_work).withoutIndex();
+        if (mOtherWorkOption == null) mOtherWorkOption = new MenuOption(R.string.m_more_work);
         mOtherWorkOption.withApp(appInfo);
     }
 
     public List<MenuOption> getOptions() { return mAllOptions; }
+    public boolean hasDynamicMenu() { return mHasDynamicMenu; }
+    public void loadMenu(MenuListener menuListener) {
+        mAllOptions.clear();
 
+        loadStaticMenu();
+        loadDynamicMenu(menuListener);
+    }
+
+    public interface MenuListener {
+        void onFullMenuLoaded();
+    }
 }

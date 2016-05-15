@@ -4,7 +4,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 
-import ra.appambekar.helpers.CloudinaryHelper;
+import ra.appambekar.helpers.ImageCloudHelper;
 
 /**
  * Created by rugvedambekar on 2016-04-12.
@@ -29,8 +29,8 @@ public class AppScreen implements Parcelable {
     public String getImage() { return image; }
     public int getIndex() { return index; }
 
-    public String getImageURL() { return CloudinaryHelper.getInstance().getBaseImagesURL() + image; }
-    public String getThumbnailURL(int thumbHeight) { return CloudinaryHelper.getInstance().getHeightTransformURL(thumbHeight) + image; }
+    public String getImageURL() { return ImageCloudHelper.getInstance().getBaseImagesURL() + image; }
+    public String getThumbnailURL(int thumbHeight) { return ImageCloudHelper.getInstance().getHeightTransformURL(thumbHeight) + image; }
 
     @Override
     public int describeContents() {

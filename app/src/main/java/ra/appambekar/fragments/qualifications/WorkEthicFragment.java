@@ -67,6 +67,8 @@ public class WorkEthicFragment extends BaseAsyncFragment implements WorkEthicIte
 
     @Override
     public void expanded(WorkEthicItem item) {
+        if (mExpandedItem == item) return;
+
         if (mExpandedItem != null) mExpandedItem.collapse();
         mExpandedItem = item;
     }

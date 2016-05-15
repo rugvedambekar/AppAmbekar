@@ -2,6 +2,7 @@
 <resources>
 
     <string name="app_name">AppAmbekar</string>
+    <string name="app_title">R.Ambekar</string>
     <string name="main_header">Rugved Ambekar</string>
     <string name="main_menu">Main Menu</string>
     <string name="action_example">Example action</string>
@@ -31,9 +32,20 @@
     <string name="i_apps_title">Why Apps?</string>
     <string name="i_apps_content">Apps are the most personal way to reach a user… they live in peoples\' pockets! Me any pretty much everyone I know can’t get enough apps, so I couldn’t help but want to make some good ones.</string>
     <string name="i_android_title">Why Android?</string>
-    <string name="i_android_content">I love the fact that Android provides beautiful experiences on so many different phones, and gives developers a means of reaching such a vast, international audience.</string>
+    <string name="i_android_content">I love the fact that Android provides beautiful experiences on such a range of devices, and gives developers a means of reaching such a vast, international audience.</string>
     <string name="i_remote_title">Why Remote?</string>
     <string name="i_remote_content">It took me some time before realizing remote work was for me… but now I know that I need the freedom to travel, work on my schedule and go beyond the standard 9–5 job!</string>
+
+    <!--Contact-->
+    <string name="c_heading">Contact Information</string>
+    <string name="c_sub_heading">I am always eager to get feedback about my work, as well as hear about any great remote opportunities. If you want to talk I encourage you to get in touch! Its as easy as a tap.</string>
+    <string name="c_thanks">Thanks for checking out my app!</string>
+    <string name="c_no_connection_info">Please connect to the internet to ensure my contact info is up-to-date!</string>
+    <string name="c_location">Toronto, ON; Canada</string>
+    <string name="c_email">rugved.ambekar@gmail.com</string>
+    <string name="c_phone">(416) 571 7942</string>
+    <string name="c_email_subject">Re: App Ambekar</string>
+
 
     <!-- Qualifications -->
     <string name="q_communication">Impeccable Communication</string>
@@ -221,5 +233,8 @@
 
     <string name="title_activity_app_screen">AppScreenActivity</string>
     <string name="hello_world">Hello world!</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

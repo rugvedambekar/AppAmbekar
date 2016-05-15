@@ -3,6 +3,7 @@ package ra.appambekar.views;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Typeface;
+import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -70,11 +71,15 @@ public class IconListItem extends LinearLayout {
     }
 
     public void setContent(int contentId) {
-        mTV_content.setText(contentId);
+        if (TextUtils.isEmpty(mTV_content.getText())) mTV_content.setText(contentId);
+        else mTV_content.switchText(getResources().getString(contentId));
     }
     public void setContent(String content) {
-        mTV_content.setText(content);
+        if (TextUtils.isEmpty(mTV_content.getText())) mTV_content.setText(content);
+        else mTV_content.switchText(content);
     }
+
+    public CharSequence getContent() { return mTV_content.getText(); }
 
     public enum Type {
         Light(32, 10, 18),
@@ -83,7 +88,7 @@ public class IconListItem extends LinearLayout {
         int IconSz, Spacing, TextSz;
         FontType fType;
 
-        private Type(int ic, int sp, int txt) {
+        Type(int ic, int sp, int txt) {
             IconSz = ic;
             Spacing = sp;
             TextSz = txt;

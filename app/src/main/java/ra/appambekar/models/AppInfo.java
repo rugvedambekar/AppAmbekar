@@ -1,16 +1,8 @@
 package ra.appambekar.models;
 
-import android.os.Parcel;
-import android.os.Parcelable;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.firebase.client.DataSnapshot;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import ra.appambekar.helpers.CloudinaryHelper;
-import ra.appambekar.helpers.FirebaseHelper;
+import ra.appambekar.helpers.ImageCloudHelper;
 
 import static ra.appambekar.helpers.FirebaseHelper.*;
 
@@ -38,7 +30,7 @@ public class AppInfo {
 
     public void setAppFirebaseEXT(String ext) { mAppExt = ext; }
 
-    public String getLogoURL() { return CloudinaryHelper.getInstance().getBaseImagesURL() + logo; }
+    public String getLogoURL() { return ImageCloudHelper.getInstance().getBaseImagesURL() + logo; }
     public String getScreensEXT() { return FireChild.AppProjects.extension() + "/" + mAppExt + FireChild.Screens.extension(); }
     public String getGooglePlayLink() { return playId.isEmpty() ? null : "https://play.google.com/store/apps/details?id=" + playId; }
 

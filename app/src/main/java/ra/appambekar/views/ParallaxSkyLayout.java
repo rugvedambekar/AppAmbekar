@@ -78,18 +78,17 @@ public class ParallaxSkyLayout extends RelativeLayout {
         mScrollView = scrollView;
         mScrollView.getViewTreeObserver().addOnScrollChangedListener(mScrollListener = new OnScrollChangedListener() {
 
-            float maxScrollY = 0;
+            float maxScrollY = 0, lastScrollY = -1;
 
             @Override public void onScrollChanged() {
-                if (maxScrollY == 0) {
-                    maxScrollY = mScrollView.getChildAt(0).getHeight() - mScrollView.getHeight();
-                }
+                if (lastScrollY == mScrollView.getScrollY()) return;
+                lastScrollY = mScrollView.getScrollY();
 
-                float scrolledY = mScrollView.getScrollY();
+                if (maxScrollY == 0) maxScrollY = mScrollView.getChildAt(0).getHeight() - mScrollView.getHeight();
 
-                float percentScrolledY = Math.min(scrolledY / maxScrollY, 1);
+                float percentScrolledY = Math.min(lastScrollY / maxScrollY, 1);
 
-                Log.d(TAG, String.format("onScrolled:: scrolledY=%f maxScrollY=%f", scrolledY, maxScrollY));
+                Log.d(TAG, String.format("onScrolled:: scrolledY=%f maxScrollY=%f", lastScrollY, maxScrollY));
 
                 reactToScroll(percentScrolledY);
 

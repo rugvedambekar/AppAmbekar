@@ -19,7 +19,7 @@ public class FirebaseHelper {
     private static final String RootURL = "https://flickering-torch-7021.firebaseio.com";
 
     public enum FireChild {
-        BaseImagesURL, AppProjects,
+        BaseImagesURL, AppProjects, Contact,
         Info, Screens,
         showcase;
 

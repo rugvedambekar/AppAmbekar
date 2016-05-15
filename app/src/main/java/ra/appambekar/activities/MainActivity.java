@@ -4,8 +4,10 @@ import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.View;
 import android.widget.AbsListView;
@@ -23,11 +25,12 @@ import ra.appambekar.fragments.HomeFragment;
 import ra.appambekar.fragments.qualifications.QualificationsFragment;
 import ra.appambekar.fragments.apps.AppsPagerFragment;
 import ra.appambekar.models.MenuOption;
+import ra.appambekar.utilities.receivers.NetworkChangeReceiver;
 
 import static com.balysv.materialmenu.MaterialMenuDrawable.*;
 
 
-public class MainActivity extends BaseToolbarActivity {
+public class MainActivity extends BaseToolbarActivity implements NetworkChangeReceiver.Responder {
 
     private DrawerLayout mMenuLayout;
     private MenuAdapter mMenuAdapter;
@@ -36,9 +39,6 @@ public class MainActivity extends BaseToolbarActivity {
     private ActionBarDrawerToggle mNavMenuToggle;
     private MenuOption mLastSelectedOption;
 
-    private long mLastBackPress = 0;
-    private Toast mBackToast = null;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,23 +46,22 @@ public class MainActivity extends BaseToolbarActivity {
         setContentView(R.layout.activity_main);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
+        NetworkChangeReceiver.RegisterResponder(this);
+
         initializeToolbar();
         initializeNavMenu();
-
-        setHeader(R.string.main_header);
     }
 
     @Override
-    public void onBackPressed() {
-        if (System.currentTimeMillis() - mLastBackPress < 2000) {
-            mBackToast.cancel();
-            super.onBackPressed();
+    protected void onDestroy() {
+        super.onDestroy();
+        NetworkChangeReceiver.RemoveAllResponders();
+    }
 
-        } else {
-            mBackToast = Toast.makeText(this, R.string.back_notification, Toast.LENGTH_SHORT);
-            mLastBackPress = System.currentTimeMillis();
-            mBackToast.show();
-        }
+    @Override
+    protected void onPostResume() {
+        super.onPostResume();
+        setHeader(R.string.main_header);
     }
 
     private void initializeNavMenu() {
@@ -124,11 +123,33 @@ public class MainActivity extends BaseToolbarActivity {
     }
 
     @Override
+    public void onBackPressed() {
+        if (!closeNavMenu()) super.onBackPressed();
+    }
+
+    @Override
+    public void addContactFragment() {
+        closeNavMenu();
+        super.addContactFragment();
+    }
+
+    private boolean closeNavMenu() {
+        if (mMenuLayout.isDrawerOpen(GravityCompat.START)) {
+            mMenuLayout.closeDrawer(GravityCompat.START);
+            return true;
+        }
+
+        return false;
+    }
+
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         return false;
     }
 
     private void selectMenuOption(MenuOption option) {
+        popContactFragment();
+
         if (mLastSelectedOption == option) {
             mMenuLayout.closeDrawer(mNavMenuList);
             return;
@@ -156,14 +177,22 @@ public class MainActivity extends BaseToolbarActivity {
                 return;
         }
 
-        mNavMenuList.setSelection(option.getIndex());
-        mNavMenuList.setItemChecked(option.getIndex(), true);
+        mNavMenuList.setSelection(mMenuAdapter.getPosition(option));
+        mNavMenuList.setItemChecked(mMenuAdapter.getPosition(option), true);
 
         mMenuLayout.closeDrawer(mNavMenuList);
     }
 
     private void startFragment(Fragment frag) {
-        FragmentManager fManager = getSupportFragmentManager();
-        fManager.beginTransaction().replace(R.id.container_main, frag).commit();
+        popContactFragment();
+        getSupportFragmentManager().beginTransaction().replace(R.id.container_main, frag).commit();
     }
+
+    @Override
+    public void onNetworkAvailable() {
+        mMenuAdapter.refreshIfRequired();
+    }
+
+    @Override
+    public void onNetworkUnavailable() { }
 }

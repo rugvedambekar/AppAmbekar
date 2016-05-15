@@ -3,6 +3,7 @@ package ra.appambekar.views;
 import android.animation.Animator;
 import android.animation.ValueAnimator;
 import android.content.Context;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.LinearLayout;
@@ -14,6 +15,8 @@ import ra.smarttextview.SmartTextView;
  * Created by rugvedambekar on 2016-02-29.
  */
 public class WorkEthicItem extends LinearLayout implements View.OnClickListener, ValueAnimator.AnimatorUpdateListener, ViewTreeObserver.OnGlobalLayoutListener {
+
+    private static final String TAG = WorkEthicItem.class.getSimpleName();
 
     private SmartTextView mTV_preTitle, mTV_title;
     private SmartTextView mTV_content1, mTV_content2;
@@ -86,6 +89,8 @@ public class WorkEthicItem extends LinearLayout implements View.OnClickListener,
     }
 
     public void expand() {
+        Log.d(TAG, "Expanding Item : " + mTV_title.getText());
+
         ValueAnimator animator = ValueAnimator.ofInt(0, mContentHeight).setDuration(250);
         animator.addUpdateListener(this);
 
@@ -97,6 +102,8 @@ public class WorkEthicItem extends LinearLayout implements View.OnClickListener,
     }
 
     public void collapse() {
+        Log.d(TAG, "Collapsing Item : " + mTV_title.getText());
+
         final int initialHeight = mContentContainer.getMeasuredHeight();
         ValueAnimator animator = ValueAnimator.ofInt(initialHeight, 0).setDuration(250);
         animator.addUpdateListener(this);
@@ -123,6 +130,6 @@ public class WorkEthicItem extends LinearLayout implements View.OnClickListener,
     }
 
     public interface WEIObserver {
-        public void expanded(WorkEthicItem item);
+        void expanded(WorkEthicItem item);
     }
 }

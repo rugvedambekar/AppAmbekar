@@ -57,16 +57,4 @@ public class QualificationsFragment extends BaseAsyncFragment {
         mViewPager.setAdapter(mAdapter);
         mTabStrip.setViewPager(mViewPager);
     }
-
-    @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        ((BaseToolbarActivity) activity).elevateToolbar(false);
-    }
-
-    @Override
-    public void onDetach() {
-        ((BaseToolbarActivity) getActivity()).elevateToolbar(true);
-        super.onDetach();
-    }
 }

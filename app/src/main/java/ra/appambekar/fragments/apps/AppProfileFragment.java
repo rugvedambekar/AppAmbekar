@@ -30,6 +30,7 @@ import ra.appambekar.models.AppInfo;
 import ra.appambekar.models.AppScreen;
 import ra.appambekar.models.comparators.AppScreenComparator;
 import ra.appambekar.utilities.LayoutUtils;
+import ra.appambekar.views.FadeInNetworkImageView;
 import ra.smarttextview.SmartTextView;
 
 
@@ -123,7 +124,7 @@ public class AppProfileFragment extends Fragment {
     }
 
     private NetworkImageView getThumbView(final AppScreen screen) {
-        NetworkImageView niv_screenThumb = new NetworkImageView(getActivity());
+        FadeInNetworkImageView niv_screenThumb = new FadeInNetworkImageView(getActivity());
         int thumbHeight = mAppScreensLayout.getMeasuredHeight() - mAppScreensLayout.getPaddingBottom() - mAppScreensLayout.getPaddingTop();
 
         LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, thumbHeight);

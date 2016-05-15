@@ -85,8 +85,10 @@ public class HeaderContentHSV extends LinearLayout implements View.OnClickListen
     }
 
     public void initializeOnVisible() {
+        if (mLastSelected != null) return; // Already initialized...
+
         mHSV_content.getHitRect(scrollBounds);
-        if (mLastSelected == null && switchOn(mFirstViews.get(0)) && mObserver != null) {
+        if (switchOn(mFirstViews.get(0)) && mObserver != null) {
             mObserver.onClick((SmartTextView) mFirstViews.get(0));
         }
 

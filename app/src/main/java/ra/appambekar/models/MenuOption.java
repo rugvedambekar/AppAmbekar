@@ -8,33 +8,18 @@ import java.util.List;
  */
 public class MenuOption {
 
-    private static int NextItemIndex = 0;
-
-    private int mMenuIndex = 0;
     private int mTitleID = -1;
     private String mTitle = "";
 
     private boolean mNoConnection = false, mIsHeading = false;
     private ArrayList<AppInfo> mAppInfoList = null;
 
-    public MenuOption() { setIndex(); }
+    public MenuOption() { }
     public MenuOption(int titleId) {
         mTitleID = titleId;
-        setIndex();
     }
     public MenuOption(String title) {
         mTitle = title;
-        setIndex();
-    }
-
-    private void setIndex() {
-        mMenuIndex = NextItemIndex++;
-    }
-    public MenuOption withoutIndex() {
-        mMenuIndex = -1;
-        NextItemIndex--;
-
-        return this;
     }
 
     public MenuOption forHeading() {
@@ -52,7 +37,6 @@ public class MenuOption {
         return this;
     }
 
-    public int getIndex() { return mMenuIndex; }
     public int getTitleID() { return mTitleID; }
     public String getTitle() { return mTitle; }
 

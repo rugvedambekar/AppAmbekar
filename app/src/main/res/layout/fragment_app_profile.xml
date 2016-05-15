@@ -21,7 +21,7 @@
             android:orientation="horizontal"
             android:layout_marginBottom="10dp">
 
-            <com.android.volley.toolbox.NetworkImageView
+            <ra.appambekar.views.FadeInNetworkImageView
                 android:id="@+id/iv_appLogo"
                 android:layout_width="50dp"
                 android:layout_height="75dp"

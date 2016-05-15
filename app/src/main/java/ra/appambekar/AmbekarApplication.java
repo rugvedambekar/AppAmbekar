@@ -7,10 +7,9 @@ import android.graphics.Typeface;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
-import ra.appambekar.helpers.CloudinaryHelper;
+import ra.appambekar.helpers.ImageCloudHelper;
 import ra.appambekar.helpers.FirebaseHelper;
 import ra.appambekar.helpers.VolleyHelper;
-import ra.appambekar.utilities.LayoutUtils;
 import ra.smarttextview.SmartTextView;
 
 /**
@@ -33,7 +32,7 @@ public class AmbekarApplication extends Application {
 
         FirebaseHelper.getInstance();
         VolleyHelper.getInstance();
-        CloudinaryHelper.getInstance();
+        ImageCloudHelper.getInstance();
     }
 
     public static Context getAppContext() {

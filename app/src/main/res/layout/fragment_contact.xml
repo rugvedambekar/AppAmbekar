@@ -1,0 +1,121 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="ra.appambekar.fragments.ContactFragment"
+    android:background="@android:color/background_light"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clickable="true">
+
+    <ra.appambekar.views.FadeInNetworkImageView
+        android:id="@+id/niv_profilePic"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"/>
+
+    <ra.smarttextview.SmartTextView
+        android:id="@+id/tv_thanks"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:gravity="center_horizontal"
+        android:layout_centerHorizontal="true"
+        android:padding="20dp"
+        android:text="@string/c_thanks"
+        android:textSize="44sp"
+        android:textColor="@color/text_light"
+        app:font="thick"/>
+
+    <ScrollView
+        android:id="@+id/scrollContainer_contact"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/ll_contact"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ra.appambekar.views.IntroductionLayout
+                android:id="@+id/il_contact"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/background_light_faded"
+                android:padding="25dp"
+                app:introHeading="@string/c_heading"
+                app:intro="@string/c_sub_heading"/>
+
+            <LinearLayout
+                android:id="@+id/ll_contactInfoList"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingRight="25dp"
+                android:paddingLeft="25dp"
+                android:paddingBottom="25dp"
+                android:background="@color/background_light_faded">
+
+                <ra.appambekar.views.IconListItem
+                    android:id="@+id/ili_location"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    app:iconSrc="@drawable/ic_my_location"
+                    app:itemType="light"/>
+
+                <ra.appambekar.views.IconListItem
+                    android:id="@+id/ili_email"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    app:iconSrc="@drawable/ic_email"
+                    app:itemType="light"/>
+
+                <ra.appambekar.views.IconListItem
+                    android:id="@+id/ili_phone"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    app:iconSrc="@drawable/ic_phone"
+                    app:itemType="light"/>
+
+            </LinearLayout>
+
+            <RelativeLayout
+                android:id="@+id/rl_noConnectionContact"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_gravity="center_horizontal"
+                android:paddingRight="50dp"
+                android:paddingLeft="50dp"
+                android:background="@color/background_light_faded">
+
+                <include
+                    android:id="@+id/ll_noConnection"
+                    layout="@layout/item_no_connection"/>
+
+                <ra.smarttextview.SmartTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_below="@id/ll_noConnection"
+                    android:text="@string/c_no_connection_info"
+                    android:textColor="@color/toolbar_light"
+                    android:textSize="12sp"
+                    app:justified="true"
+                    app:font="reg"/>
+
+            </RelativeLayout>
+
+            <FrameLayout
+                android:id="@+id/fl_picFrame"
+                android:layout_width="match_parent"
+                android:layout_height="0dip"
+                android:background="@color/background_light_faded"/>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</RelativeLayout>

@@ -35,31 +35,15 @@ public class AppScreenFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_app_screen, container, false);
 
         NetworkImageView niv_screen = (NetworkImageView) rootView.findViewById(R.id.niv_screen);
+
         mTV_screenTitle = (SmartTextView) rootView.findViewById(R.id.tv_screenTitle);
+        mTV_screenTitle.setAlpha(0.75f);
 
         if (mAppScreen != null) {
             niv_screen.setImageUrl(mAppScreen.getImageURL(), VolleyHelper.getInstance().getImageLoader());
-            niv_screen.setOnClickListener(new View.OnClickListener() {
-                @Override public void onClick(View v) { toastTitle(); }
-            });
-
             mTV_screenTitle.setText(mAppScreen.getTitle());
         }
 
         return rootView;
     }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        toastTitle();
-    }
-
-    public void toastTitle() {
-        if (mTV_screenTitle == null) return;
-
-        mTV_screenTitle.setAlpha(1);
-        mTV_screenTitle.animate().alpha(0.25f).setDuration(500).setStartDelay(1500).start();
-    }
-
 }

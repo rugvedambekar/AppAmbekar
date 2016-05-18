@@ -81,14 +81,20 @@
 
             </LinearLayout>
 
-            <ra.appambekar.views.ErrorItemView
-                android:id="@+id/eiv_contact"
+            <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingStart="50dp"
-                android:paddingEnd="50dp"
-                android:background="@color/background_light_faded"
-                android:visibility="gone"/>
+                android:background="@color/background_light_faded">
+
+                <ra.appambekar.views.ErrorItemView
+                    android:id="@+id/eiv_contact"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="50dp"
+                    android:paddingEnd="50dp"
+                    android:visibility="gone"/>
+
+            </FrameLayout>
 
             <View
                 android:id="@+id/fl_picFrame"

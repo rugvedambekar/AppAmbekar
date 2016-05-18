@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
+import android.support.v4.util.Pair;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
@@ -89,7 +90,7 @@ public class HeaderContentHSV extends LinearLayout implements View.OnClickListen
 
         mHSV_content.getHitRect(scrollBounds);
         if (switchOn(mFirstViews.get(0)) && mObserver != null) {
-            mObserver.onClick((SmartTextView) mFirstViews.get(0));
+            mObserver.onClick((Pair) mFirstViews.get(0).getTag(R.id.tag_dogTagPair));
         }
 
         Log.d(TAG, String.format("ScrollBounds=(l=%d,r=%d), ScrollView=(l=%d,r=%d)", scrollBounds.left, scrollBounds.right, mHSV_content.getLeft(), mHSV_content.getRight()));
@@ -98,33 +99,25 @@ public class HeaderContentHSV extends LinearLayout implements View.OnClickListen
 
     public void setContentObserver(ContentObserver observer) { mObserver = observer; }
     public void addHeaderAndContent(int headerId, int contentArrayId) {
-        int contentWidth = 0;
-
         String header = getResources().getString(headerId);
         String[] content = getResources().getStringArray(contentArrayId);
 
         for (int i = 0; i < content.length; i++) {
-            final SmartTextView contentView = getView(false, content[i]);
+            final TextView contentView = getView(false, content[i]);
             contentView.setOnClickListener(this);
-            contentView.setId(contentArrayId);
-            contentView.setIndex(i);
-
-            contentView.measure(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-            contentWidth += contentView.getMeasuredWidth() + mContentSpacing;
+            contentView.setTag(R.id.tag_dogTagPair, new Pair<>(contentArrayId, i));
 
             if (i == 0) mFirstViews.add(contentView);
-
             mLL_content.addView(contentView);
         }
 
-        SmartTextView headerView = getView(true, header);
+        TextView headerView = getView(true, header);
         headerView.setLayoutParams(getLayoutParams(-1, 0, 0));
-        headerView.setId(contentWidth);
         headerView.setAlpha(0);
 
         mRL_headers.addView(headerView);
 
-        mFirstViews.get(mFirstViews.size() - 1).setTag(headerView);
+        mFirstViews.get(mFirstViews.size() - 1).setTag(R.id.tag_headerView, headerView);
     }
 
     public void scrollToSelected() {
@@ -136,7 +129,7 @@ public class HeaderContentHSV extends LinearLayout implements View.OnClickListen
 
     private void cleanHeaderViews() {
         for (View view : mFirstViews) {
-            View headerView = (View) view.getTag();
+            View headerView = (View) view.getTag(R.id.tag_headerView);
 
             if (view.getX() >= mHSV_content.getLeft() && view.getX() < mHSV_content.getRight()) {
                 headerView.setX(view.getX());
@@ -152,9 +145,9 @@ public class HeaderContentHSV extends LinearLayout implements View.OnClickListen
         }
     }
 
-    private SmartTextView getView(boolean header, String conStr) {
-        SmartTextView contentView = new SmartTextView(getContext());
-        contentView.setFontType(header ? SmartTextView.FontType.Thick : SmartTextView.FontType.Reg);
+    private TextView getView(boolean header, String conStr) {
+        TextView contentView = new SmartTextView(getContext());
+        contentView.setTypeface(SmartTextView.getFontTypeface((header ? SmartTextView.FontType.Thick : SmartTextView.FontType.Reg)));
         contentView.setTextColor(header ? mTextCol_on : mTextCol_off);
         contentView.setTextSize(header ? 12 : 20);
         contentView.setText(conStr);
@@ -179,7 +172,7 @@ public class HeaderContentHSV extends LinearLayout implements View.OnClickListen
 
     @Override
     public void onClick(View v) {
-        if (switchOn(v) && mObserver != null) mObserver.onClick((SmartTextView) v);
+        if (switchOn(v) && mObserver != null) mObserver.onClick((Pair) v.getTag(R.id.tag_dogTagPair));
     }
 
     private boolean switchOn(View v) {
@@ -218,12 +211,12 @@ public class HeaderContentHSV extends LinearLayout implements View.OnClickListen
 
             if (visibleViewIndex >= mFirstViews.size()) return;
 
-            View firstHeaderView = visibleViewIndex > 0 ? (View) mFirstViews.get(visibleViewIndex - 1).getTag() : null;
+            View firstHeaderView = visibleViewIndex > 0 ? (View) mFirstViews.get(visibleViewIndex - 1).getTag(R.id.tag_headerView) : null;
             if (firstHeaderView != null && !(boolean) firstHeaderView.getTag()) firstHeaderView = null;
 
             for (int i = visibleViewIndex; i < mFirstViews.size(); i++) {
                 View contentView = mFirstViews.get(i);
-                View headerView = (View) contentView.getTag();
+                View headerView = (View) contentView.getTag(R.id.tag_headerView);
 
                 // If first ContentView of the group is showing on screen
                 if (contentView.getLocalVisibleRect(scrollBounds)) {
@@ -248,7 +241,7 @@ public class HeaderContentHSV extends LinearLayout implements View.OnClickListen
 
                     } else if (firstHeaderView == null && i > 0) {
 
-                        View prevHeaderView = (View) mFirstViews.get(i - 1).getTag();
+                        View prevHeaderView = (View) mFirstViews.get(i - 1).getTag(R.id.tag_headerView);
 
                         // Check if we can reshow PreviousHeaderView; show if there is enough space
                         if (headerView.getX() > prevHeaderView.getWidth()) {
@@ -267,7 +260,7 @@ public class HeaderContentHSV extends LinearLayout implements View.OnClickListen
     };
 
     public interface ContentObserver {
-        public void onClick(SmartTextView contentView);
+        void onClick(Pair viewDogTag);
     }
 
 }

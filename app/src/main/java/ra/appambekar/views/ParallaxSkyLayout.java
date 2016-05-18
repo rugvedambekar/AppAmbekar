@@ -104,12 +104,11 @@ public class ParallaxSkyLayout extends RelativeLayout {
 //                Log.d(TAG, String.format("onScrolled:: scrolledY=%f maxScrollY=%f", lastScrollY, mMaxScroll));
 
                 reactToScroll(percentScrolledY);
-
             }
         });
     }
 
-    public void oscillateScroll() {
+    public void startOscillation() {
         if (mScrollOscillator != null) return;
 
         Log.d(TAG, "Oscillating Scroll : 0 to " + mMaxScroll);
@@ -120,7 +119,7 @@ public class ParallaxSkyLayout extends RelativeLayout {
         mScrollOscillator.setDuration(40000);
         mScrollOscillator.start();
     }
-    public void terminateOscillation() {
+    public void endOscillation() {
         if (mScrollOscillator == null) return;
 
         mScrollOscillator.cancel();
@@ -143,7 +142,7 @@ public class ParallaxSkyLayout extends RelativeLayout {
         showMoon(percentScrolledY);
         setBackgroundColor((Integer) mColEvaluator.evaluate(percentScrolledY, mCol_daySky, mCol_nightSky));
 
-        mSunView.setAlpha(Math.max(0, 1 - (percentScrolledY * 2)));
+        if (mSunView != null) mSunView.setAlpha(Math.max(0, 1 - (percentScrolledY * 2)));
 
         for (int i = 0; i < getChildCount(); i++) {
             View child = getChildAt(i);

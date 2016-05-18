@@ -3,6 +3,7 @@ package ra.appambekar.fragments.android;
 
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.support.v4.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -74,7 +75,7 @@ public class LibrariesFragment extends BaseAsyncFragment implements HeaderConten
     }
 
     @Override
-    public void onClick(SmartTextView contentView) {
-        mTV_libraryInfo.switchText(mLibInfoMap.get(contentView.getId())[contentView.getIndex()]);
+    public void onClick(Pair viewDogTag) {
+        mTV_libraryInfo.switchText(mLibInfoMap.get(viewDogTag.first)[(Integer) viewDogTag.second]);
     }
 }

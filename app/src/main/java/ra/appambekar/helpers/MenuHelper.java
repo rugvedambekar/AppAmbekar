@@ -49,6 +49,7 @@ public class MenuHelper {
     private void loadDynamicMenu(final MenuListener menuListener) {
         if (!(mHasDynamicMenu = AmbekarApplication.hasActiveConnection())) {
             mAllOptions.add(new MenuOption().ofType(MenuOption.Type.NoConnection));
+            if (menuListener != null) menuListener.onFullMenuLoaded();
 
         } else FirebaseHelper.getInstance().getChildREF(FireChild.AppProjects).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override

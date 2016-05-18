@@ -104,7 +104,8 @@ public class ContactFragment extends Fragment {
                     Log.e(TAG, firebaseError.toString());
                 }
             });
-        }
+
+        } else setContactInfo();
     }
 
     @Override

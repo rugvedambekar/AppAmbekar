@@ -7,4 +7,7 @@ public class NetworkEvent {
 
     public boolean networkAcquired;
 
+    public NetworkEvent(boolean acquired) {
+        networkAcquired = acquired;
+    }
 }

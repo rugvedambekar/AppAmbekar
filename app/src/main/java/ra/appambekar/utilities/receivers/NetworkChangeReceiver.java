@@ -18,7 +18,7 @@ public class NetworkChangeReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(final Context context, final Intent intent) {
         Log.d("NetworkChangeReceiver", "NETWORK CHANGE DETECTED :: " + (AmbekarApplication.hasActiveConnection() ? "ACTIVE" : "DEAD"));
-        if (AmbekarApplication.hasActiveConnection()) EventBus.getDefault().post(new NetworkEvent());
+        EventBus.getDefault().post(new NetworkEvent(AmbekarApplication.hasActiveConnection()));
     }
 
 }

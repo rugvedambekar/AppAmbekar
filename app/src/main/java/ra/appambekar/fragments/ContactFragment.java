@@ -1,7 +1,6 @@
 package ra.appambekar.fragments;
 
 
-import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.net.Uri;
@@ -10,10 +9,10 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
-import android.widget.LinearLayout;
 import android.widget.ScrollView;
 
 import com.android.volley.toolbox.NetworkImageView;
@@ -21,21 +20,26 @@ import com.firebase.client.DataSnapshot;
 import com.firebase.client.FirebaseError;
 import com.firebase.client.ValueEventListener;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
 import ra.appambekar.AmbekarApplication;
 import ra.appambekar.R;
-import ra.appambekar.activities.BaseToolbarActivity;
 import ra.appambekar.helpers.FirebaseHelper;
 import ra.appambekar.helpers.VolleyHelper;
 import ra.appambekar.models.ContactCard;
+import ra.appambekar.models.events.LoginEvent;
+import ra.appambekar.models.events.NetworkEvent;
 import ra.appambekar.utilities.LayoutUtils;
-import ra.appambekar.utilities.receivers.NetworkChangeReceiver;
+import ra.appambekar.views.ErrorItemView;
 import ra.appambekar.views.IconListItem;
 import ra.smarttextview.SmartTextView;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ContactFragment extends Fragment implements NetworkChangeReceiver.Responder {
+public class ContactFragment extends Fragment {
 
     private static final String TAG = ContactFragment.class.getSimpleName();
 
@@ -44,8 +48,9 @@ public class ContactFragment extends Fragment implements NetworkChangeReceiver.R
     private ScrollView mScrollView;
     private SmartTextView mThanksMsg;
     private NetworkImageView mProfilePic;
-    private View mPicFrame, mNoConnection;
     private IconListItem mLocation, mEmail, mPhone;
+    private ErrorItemView mErrorView;
+    private View mPicFrame;
 
     private ViewTreeObserver.OnScrollChangedListener mScrollListener;
 
@@ -63,15 +68,25 @@ public class ContactFragment extends Fragment implements NetworkChangeReceiver.R
     }
 
     @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        NetworkChangeReceiver.RegisterResponder(this);
+    public void onPause() {
+        super.onPause();
+        EventBus.getDefault().unregister(this);
     }
 
     @Override
-    public void onDetach() {
-        super.onDetach();
-        NetworkChangeReceiver.RemoveResponder(this);
+    public void onResume() {
+        super.onResume();
+        EventBus.getDefault().register(this);
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onLoggedIn(LoginEvent event) {
+        loadContactData();
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onHasNetwork(NetworkEvent event) {
+        loadContactData();
     }
 
     private void loadContactData() {
@@ -85,6 +100,7 @@ public class ContactFragment extends Fragment implements NetworkChangeReceiver.R
 
                 @Override
                 public void onCancelled(FirebaseError firebaseError) {
+                    if (firebaseError.getCode() == FirebaseError.PERMISSION_DENIED) setContactInfo();
                     Log.e(TAG, firebaseError.toString());
                 }
             });
@@ -98,7 +114,7 @@ public class ContactFragment extends Fragment implements NetworkChangeReceiver.R
         mProfilePic = (NetworkImageView) rootView.findViewById(R.id.niv_profilePic);
         mScrollView = (ScrollView) rootView.findViewById(R.id.scrollContainer_contact);
 
-        mNoConnection = rootView.findViewById(R.id.rl_noConnectionContact);
+        mErrorView = (ErrorItemView) rootView.findViewById(R.id.eiv_contact);
         mPicFrame = rootView.findViewById(R.id.fl_picFrame);
 
         mThanksMsg = (SmartTextView) rootView.findViewById(R.id.tv_thanks);
@@ -131,13 +147,21 @@ public class ContactFragment extends Fragment implements NetworkChangeReceiver.R
             }
         });
 
-        if (mHasActiveConnection) mProfilePic.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-            @Override public void onGlobalLayout() {
-                mProfilePic.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-                mPicFrame.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, mProfilePic.getMeasuredHeight()));
+        mProfilePic.getViewTreeObserver().addOnGlobalLayoutListener(
+                new ViewTreeObserver.OnGlobalLayoutListener() {
+                    @Override public void onGlobalLayout() {
+                        mProfilePic.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                        mPicFrame.getLayoutParams().height = mProfilePic.getMeasuredHeight();
+                        mPicFrame.requestLayout();
+                    }
+                });
+
+        mScrollView.setOnTouchListener(new View.OnTouchListener() {
+            @Override public boolean onTouch(View v, MotionEvent event) {
+                // restrict all click and scroll features for view can child views
+                return !mHasActiveConnection || !FirebaseHelper.getInstance().isAuthenticated();
             }
         });
-
         mScrollView.getViewTreeObserver().addOnScrollChangedListener(mScrollListener = new ViewTreeObserver.OnScrollChangedListener() {
             float maxScrollY = 0, lastScrollY = 0;
 
@@ -172,33 +196,11 @@ public class ContactFragment extends Fragment implements NetworkChangeReceiver.R
     }
 
     private void setContactInfo() {
-        if (mLocation != null) {
-            if (mContactCard == null) mLocation.setContent(R.string.c_location);
-            else mLocation.setContent(mContactCard.getAddress());
-        }
+        if (mLocation != null && mContactCard != null) mLocation.switchContent(mContactCard.getAddress());
+        if (mEmail != null && mContactCard != null) mEmail.switchContent(mContactCard.getEmail());
+        if (mPhone != null && mContactCard != null) mPhone.switchContent(mContactCard.getPhone());
 
-        if (mEmail != null) {
-            if (mContactCard == null) mEmail.setContent(R.string.c_email);
-            else mEmail.setContent(mContactCard.getEmail());
-        }
-
-        if (mPhone != null) {
-            if (mContactCard == null) mPhone.setContent(R.string.c_phone);
-            else mPhone.setContent(mContactCard.getPhone());
-        }
-
-        if (mNoConnection != null) {
-            if (mHasActiveConnection && mNoConnection.getVisibility() == View.VISIBLE) {
-                mNoConnection.animate().alpha(0).setDuration(250).withEndAction(new Runnable() {
-                    @Override public void run() { mNoConnection.setVisibility(View.GONE); }
-                }).start();
-
-            } else mNoConnection.setVisibility(mHasActiveConnection ? View.GONE : View.VISIBLE);
-        }
-
-        if (mHasActiveConnection && mProfilePic != null && mPicFrame != null && mPicFrame.getHeight() == 0) {
-            mPicFrame.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, mProfilePic.getMeasuredHeight()));
-        }
+        setErrorView();
 
         if (mProfilePic != null && mContactCard != null) {
             mProfilePic.postDelayed(new Runnable() {
@@ -209,13 +211,22 @@ public class ContactFragment extends Fragment implements NetworkChangeReceiver.R
         }
     }
 
-    @Override
-    public void onNetworkAvailable() {
-        loadContactData();
-    }
+    private void setErrorView() {
+        if (mErrorView == null) return;
 
-    @Override
-    public void onNetworkUnavailable() {
+        if (!mHasActiveConnection) {
+            mErrorView.setForNoConnection(R.string.e_no_connection_info_contact, 0);
+            mErrorView.setVisibility(View.VISIBLE);
 
+        } else if (!FirebaseHelper.getInstance().isAuthenticated()) {
+            mErrorView.setForNoAuthentication(R.string.e_no_auth_info_contact, 0);
+            mErrorView.setVisibility(View.VISIBLE);
+
+        } else if (mErrorView.getVisibility() == View.VISIBLE) {
+            mErrorView.animate().alpha(0).setDuration(750).withEndAction(new Runnable() {
+                @Override public void run() { mErrorView.setVisibility(View.GONE); }
+            }).start();
+
+        }
     }
 }

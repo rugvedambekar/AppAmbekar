@@ -81,34 +81,16 @@
 
             </LinearLayout>
 
-            <RelativeLayout
-                android:id="@+id/rl_noConnectionContact"
-                android:layout_width="wrap_content"
+            <ra.appambekar.views.ErrorItemView
+                android:id="@+id/eiv_contact"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_gravity="center_horizontal"
-                android:paddingRight="50dp"
-                android:paddingLeft="50dp"
-                android:background="@color/background_light_faded">
+                android:paddingStart="50dp"
+                android:paddingEnd="50dp"
+                android:background="@color/background_light_faded"
+                android:visibility="gone"/>
 
-                <include
-                    android:id="@+id/ll_noConnection"
-                    layout="@layout/item_no_connection"/>
-
-                <ra.smarttextview.SmartTextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_below="@id/ll_noConnection"
-                    android:text="@string/c_no_connection_info"
-                    android:textColor="@color/toolbar_light"
-                    android:textSize="12sp"
-                    app:justified="true"
-                    app:font="reg"/>
-
-            </RelativeLayout>
-
-            <FrameLayout
+            <View
                 android:id="@+id/fl_picFrame"
                 android:layout_width="match_parent"
                 android:layout_height="0dip"

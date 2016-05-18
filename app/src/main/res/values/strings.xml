@@ -9,9 +9,23 @@
     <string name="action_settings">Settings</string>
     <string name="default_hidden_view_tag">View Hidden Content</string>
     <string name="heading_app_screens">Application Screens:</string>
-    <string name="back_notification">PRESS BACK AGAIN TO EXIT</string>
+    <string name="back_notification">PRESS BACK AGAIN TO LOGOUT &amp; EXIT</string>
     <string name="link_google_play">View in Google Play Store</string>
     <string name="link_google_play_na">Not Available in Google Play Store</string>
+
+    <!--Login Dialog-->
+    <string name="l_heading_login">Login</string>
+    <string name="l_heading_register">Register</string>
+    <string name="l_heading_guest">Proceed as Guest</string>
+    <string name="l_heading_submit">Submit</string>
+    <string name="l_heading_cancel">Cancel</string>
+    <string name="l_email_hint_login">Enter your email</string>
+    <string name="l_pass_hint_login">Enter your password</string>
+    <string name="l_email_hint_reg">Enter a valid email</string>
+    <string name="l_pass_hint_reg">Enter a password</string>
+    <string name="l_name_hint">Enter your first &amp; last name</string>
+    <string name="l_info_login">Please login to access the complete application. You can still proceed as a guest and view all the static content.</string>
+    <string name="l_info_reg">Please note this registry information will not be used for anything more then to track who is using my app.</string>
 
     <!-- Menu Items -->
     <string name="m_home">Home</string>
@@ -19,9 +33,15 @@
     <string name="m_apps">My Android Apps</string>
     <string name="m_work">My Completed Work</string>
     <string name="m_more_work">All Other Apps</string>
-    <string name="m_no_connection">Not Connected!</string>
-    <string name="m_no_connection_info">Please connect to the internet to view my past work, which includes:</string>
-    <string name="m_no_connection_work">Univision Deportes\nLiving Spaces\nAuluxa</string>
+
+    <!--Errors-->
+    <string name="e_no_connection">Not Connected!</string>
+    <string name="e_no_connection_info_menu">Please connect to the internet to view my past work, which includes:</string>
+    <string name="e_no_connection_details_menu">Univision Deportes\nLiving Spaces\nAuluxa</string>
+    <string name="e_no_connection_info_contact">Please connect to the internet to view my contact info.</string>
+    <string name="e_no_auth">Not Logged In!</string>
+    <string name="e_no_auth_info_menu">Please login to view my past work, which includes:</string>
+    <string name="e_no_auth_info_contact">Please login to view my contact info</string>
 
     <!--Introduction-->
     <string name="i_heading">Introduction</string>
@@ -38,14 +58,12 @@
 
     <!--Contact-->
     <string name="c_heading">Contact Information</string>
-    <string name="c_sub_heading">I am always eager to get feedback about my work, as well as hear about any great remote opportunities. If you want to talk I encourage you to get in touch! Its as easy as a tap.</string>
+    <string name="c_sub_heading">I am always eager to get feedback about my work, as well as hear about any great remote opportunities. If you want to talk I encourage you to get in touch! Tap to email or call.</string>
     <string name="c_thanks">Thanks for checking out my app!</string>
-    <string name="c_no_connection_info">Please connect to the internet to ensure my contact info is up-to-date!</string>
     <string name="c_location">Toronto, ON; Canada</string>
     <string name="c_email">rugved.ambekar@gmail.com</string>
     <string name="c_phone">(416) 571 7942</string>
     <string name="c_email_subject">Re: App Ambekar</string>
-
 
     <!-- Qualifications -->
     <string name="q_communication">Impeccable Communication</string>

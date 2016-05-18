@@ -8,13 +8,13 @@ import android.widget.ArrayAdapter;
 
 import com.android.volley.toolbox.NetworkImageView;
 
-import ra.appambekar.AmbekarApplication;
 import ra.appambekar.R;
 import ra.appambekar.helpers.MenuHelper;
 import ra.appambekar.helpers.MenuHelper.MenuListener;
 import ra.appambekar.helpers.VolleyHelper;
 import ra.appambekar.models.MenuOption;
 import ra.appambekar.utilities.LayoutUtils;
+import ra.appambekar.views.ErrorItemView;
 import ra.smarttextview.SmartTextView;
 
 /**
@@ -52,8 +52,15 @@ public class MenuAdapter extends ArrayAdapter<MenuOption> implements MenuListene
     public View getView(int position, View convertView, ViewGroup parent) {
         MenuOption mOption = getItem(position);
 
-        if (mOption.isNoConnection()) {
-            return mInflater.inflate(R.layout.item_no_connection_menu, null);
+        if (mOption.getType() != MenuOption.Type.Heading && mOption.getType() != MenuOption.Type.Regular) {
+            ErrorItemView errorView = new ErrorItemView(getContext());
+            if (mOption.getType() == MenuOption.Type.NoConnection) {
+                errorView.setForNoConnection(R.string.e_no_connection_info_menu, R.string.e_no_connection_details_menu);
+            } else if (mOption.getType() == MenuOption.Type.NoAuthentication) {
+                errorView.setForNoAuthentication(R.string.e_no_auth_info_menu, R.string.e_no_connection_details_menu);
+            }
+
+            return errorView;
         }
 
         convertView = mInflater.inflate(R.layout.item_nav_menu, null);

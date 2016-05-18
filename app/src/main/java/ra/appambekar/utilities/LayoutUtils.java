@@ -1,23 +1,17 @@
 package ra.appambekar.utilities;
 
 import android.content.Context;
-import android.content.res.AssetManager;
+import android.content.ContextWrapper;
 import android.content.res.Resources;
-import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
-import android.graphics.Typeface;
-import android.os.Build;
+import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.TextView;
-
-import ra.smarttextview.SmartTextView;
 
 /**
  * Created by rugvedambekar on 2016-02-22.
@@ -60,6 +54,8 @@ public class LayoutUtils {
 
     public static class View {
 
+        public static final int ANIM_DUR = 150;
+
         public static void SetPadding(android.view.View view, int dpPadding) {
             if (view == null) return;
 
@@ -73,11 +69,6 @@ public class LayoutUtils {
             int size = (int) Convert.DpToPx(dpSize, view.getContext());
             view.getLayoutParams().height = size;
             view.getLayoutParams().width = size;
-        }
-
-        public static int GetMeasuredHeight(android.view.View view) {
-            view.measure(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-            return view.getMeasuredHeight();
         }
 
         public static void AdjustTextSizeForWidth(TextView textView, int desiredWidth) {
@@ -102,6 +93,37 @@ public class LayoutUtils {
             }
 
             textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
+        }
+
+        public static void Show(final android.view.View view, boolean show) {
+            view.setAlpha(show ? 0 : 1);
+            view.setVisibility(android.view.View.VISIBLE);
+            view.animate().alpha(show ? 1 : 0).setDuration(ANIM_DUR).setStartDelay(show ? ANIM_DUR : 0).withEndAction(new Runnable() {
+                @Override public void run() {
+                    if (view.getAlpha() == 0) view.setVisibility(android.view.View.GONE);
+                }
+            }).start();
+        }
+
+        public static void SetAsButton(android.view.View view, final Runnable runOnClick) {
+            view.setOnClickListener(new android.view.View.OnClickListener() {
+                @Override public void onClick(final android.view.View v) {
+                    v.animate().alpha(0.25f).setDuration(ANIM_DUR)
+                            .withStartAction(runOnClick)
+                            .withEndAction(new Runnable() { @Override public void run() {
+                                v.animate().alpha(1).setDuration(ANIM_DUR).start();
+                            } }).start();
+                }
+            });
+        }
+
+        public static AppCompatActivity getActivity(android.view.View view) {
+            Context context = view.getContext();
+            while (context instanceof ContextWrapper) {
+                if (context instanceof AppCompatActivity) return (AppCompatActivity) context;
+                context = ((ContextWrapper) context).getBaseContext();
+            }
+            return null;
         }
     }
 

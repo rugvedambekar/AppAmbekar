@@ -60,6 +60,8 @@ public class AppProfileFragment extends Fragment {
         mAppScreens = new ArrayList<>();
         FirebaseHelper.getInstance().getChildREF(mAppInfo.getScreensEXT()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override public void onDataChange(DataSnapshot dataSnapshot) {
+                if (getActivity() == null) return;
+
                 for (DataSnapshot dataSS : dataSnapshot.getChildren()) {
                     mAppScreens.add(dataSS.getValue(AppScreen.class));
                 }

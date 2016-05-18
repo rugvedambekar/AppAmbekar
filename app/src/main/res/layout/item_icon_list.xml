@@ -22,6 +22,7 @@
         android:paddingLeft="5dp"
         android:paddingRight="5dp"
         android:textSize="18dp"
+        android:text="-"
         app:font="thin"/>
 
 </LinearLayout>

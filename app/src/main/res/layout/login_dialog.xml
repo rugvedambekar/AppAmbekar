@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/container_loginDialog"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ra.smarttextview.SmartTextView
+        android:id="@+id/tv_loginHeader"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/toolbar_main_dark"
+        android:paddingTop="10dp"
+        android:paddingStart="25dp"
+        android:paddingEnd="25dp"
+        android:paddingBottom="10dp"
+        android:textSize="28sp"
+        android:textColor="@color/text_lighter"
+        android:text="@string/l_heading_login"
+        app:font="thin"/>
+
+    <LinearLayout
+        android:id="@+id/container_loginContent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginEnd="25dp">
+
+        <ra.smarttextview.SmartTextView
+            android:id="@+id/tv_loginInfo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
+            android:textSize="12sp"
+            android:textColor="@color/text_med"
+            android:text="@string/l_info_login"
+            app:justified="true"
+            app:font="reg"/>
+
+        <EditText
+            android:id="@+id/et_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textEmailAddress"
+            android:hint="@string/l_name_hint"
+            android:background="@drawable/underline"
+            android:padding="5dp"
+            android:layout_marginStart="15dp"
+            android:singleLine="true"
+            android:textSize="14sp"
+            android:textColor="@color/text_med"
+            android:textColorHint="@color/toolbar_light_med"
+            android:visibility="invisible"/>
+
+        <EditText
+            android:id="@+id/et_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textEmailAddress"
+            android:hint="@string/l_email_hint_login"
+            android:background="@drawable/underline"
+            android:padding="5dp"
+            android:layout_marginStart="15dp"
+            android:singleLine="true"
+            android:textSize="14sp"
+            android:textColor="@color/text_med"
+            android:textColorHint="@color/toolbar_light_med"/>
+
+        <EditText
+            android:id="@+id/et_pass"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/l_pass_hint_login"
+            android:background="@drawable/underline"
+            android:padding="5dp"
+            android:layout_marginStart="15dp"
+            android:singleLine="true"
+            android:textSize="14sp"
+            android:textColor="@color/text_med"
+            android:textColorHint="@color/toolbar_light_med"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_login_buttons"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_margin="25dp">
+
+        <LinearLayout
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginEnd="5dp"
+            android:orientation="vertical">
+
+            <ra.smarttextview.SmartTextView
+                android:id="@+id/tv_register"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/rounded_button_login"
+                android:gravity="center"
+                android:padding="10dp"
+                android:textSize="10sp"
+                android:textAllCaps="true"
+                android:textColor="@color/text_med"
+                android:text="@string/l_heading_register"
+                app:font="thick"/>
+
+            <ra.smarttextview.SmartTextView
+                android:id="@+id/tv_guest"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rounded_button_login"
+                android:gravity="center"
+                android:padding="10dp"
+                android:textSize="10sp"
+                android:textAllCaps="true"
+                android:textColor="@color/text_med"
+                android:text="@string/l_heading_guest"
+                app:font="thick"/>
+
+        </LinearLayout>
+
+        <ra.smarttextview.SmartTextView
+            android:id="@+id/tv_login"
+            android:layout_width="0dip"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_marginStart="5dp"
+            android:background="@drawable/rounded_button_login"
+            android:gravity="center"
+            android:padding="10dp"
+            android:textSize="10sp"
+            android:textAllCaps="true"
+            android:textColor="@color/text_med"
+            android:text="@string/l_heading_login"
+            app:font="thick"/>
+
+    </LinearLayout>
+
+</LinearLayout>

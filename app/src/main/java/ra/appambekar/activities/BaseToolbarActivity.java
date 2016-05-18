@@ -3,6 +3,8 @@ package ra.appambekar.activities;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Build;
+import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -41,7 +43,7 @@ public class BaseToolbarActivity extends AppCompatActivity {
     private long mLastBackPress = 0;
     private Toast mBackToast = null;
 
-    protected void initializeToolbar() {
+    protected void initializeBaseToolbar() {
         mToolbar = (RAToolbar) findViewById(R.id.main_toolbar);
         if (mToolbar == null) return;
 
@@ -53,13 +55,7 @@ public class BaseToolbarActivity extends AppCompatActivity {
         };
 
         mToolbar.setTitleTextColor(Color.WHITE);
-
         mContactLogo.setAlpha(ALPHA_OFF);
-        mContactLogo.setOnClickListener(new View.OnClickListener() {
-            @Override public void onClick(View v) {
-                if (!popContactFragment()) addContactFragment();
-            }
-        });
 
         setSupportActionBar(mToolbar);
         if (getSupportActionBar() != null) {
@@ -74,9 +70,18 @@ public class BaseToolbarActivity extends AppCompatActivity {
         }
     }
 
+    protected void initializeApplication() {
+        if (mToolbar == null || mContactLogo == null) return;
+
+        mContactLogo.setOnClickListener(new View.OnClickListener() {
+            @Override public void onClick(View v) {
+                if (!popContactFragment()) addContactFragment();
+            }
+        });
+    }
+
     @Override
     public void onBackPressed() {
-
         if (popContactFragment()) return;
 
         if (System.currentTimeMillis() - mLastBackPress < 2000) {

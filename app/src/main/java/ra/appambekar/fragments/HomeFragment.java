@@ -11,6 +11,7 @@ import android.widget.ScrollView;
 
 import ra.appambekar.R;
 import ra.appambekar.activities.BaseToolbarActivity;
+import ra.appambekar.utilities.LayoutUtils;
 import ra.appambekar.views.ParallaxSkyLayout;
 import ra.smarttextview.SmartTextView;
 
@@ -21,6 +22,7 @@ public class HomeFragment extends Fragment {
 
     private ParallaxSkyLayout mParallaxSky;
     private SmartTextView mContactInfo;
+    private View mIntroContainer;
 
     private boolean mScrollLocked;
 
@@ -30,6 +32,7 @@ public class HomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_home, container, false);
 
+        mIntroContainer = rootView.findViewById(R.id.container_intro);
         mContactInfo = (SmartTextView) rootView.findViewById(R.id.tv_contact);
         mParallaxSky = (ParallaxSkyLayout) rootView.findViewById(R.id.pl_background);
         ScrollView scrollContainer = (ScrollView) rootView.findViewById(R.id.scrollContainer_intro);
@@ -41,12 +44,9 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        mContactInfo.setOnClickListener(new View.OnClickListener() {
-            @Override public void onClick(View v) {
+        LayoutUtils.View.SetAsButton(mContactInfo, new Runnable() {
+            @Override public void run() {
                 ((BaseToolbarActivity) getActivity()).addContactFragment();
-                mContactInfo.animate().alpha(0.25f).setDuration(150).withEndAction(new Runnable() {
-                    @Override public void run() { mContactInfo.animate().alpha(1).setDuration(150).start(); }
-                }).start();
             }
         });
 

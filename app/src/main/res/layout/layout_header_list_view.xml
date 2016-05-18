@@ -8,7 +8,6 @@
         android:id="@+id/tv_hlbHeader"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Application Types"
         android:textSize="28sp"
         app:font="thin"/>
 
@@ -17,7 +16,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/tv_hlbHeader"
-        android:text="I've Worked On"
         android:textSize="12sp"
         app:font="thick"/>
 
@@ -26,13 +24,14 @@
         android:layout_width="match_parent"
         android:layout_height="1dip"
         android:layout_marginTop="10dp"
-        android:layout_marginBottom="15dp"
         android:layout_below="@id/tv_hlbTag"
         android:background="@android:color/darker_gray"/>
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dip"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
         android:layout_weight="1">
 
         <LinearLayout

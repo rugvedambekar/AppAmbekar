@@ -1,6 +1,8 @@
 package ra.appambekar.views;
 
 import android.animation.ArgbEvaluator;
+import android.animation.ObjectAnimator;
+import android.animation.ValueAnimator;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.support.v7.widget.RecyclerView;
@@ -10,6 +12,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.view.ViewTreeObserver.OnScrollChangedListener;
+import android.view.animation.Interpolator;
+import android.view.animation.LinearInterpolator;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
@@ -28,15 +32,18 @@ public class ParallaxSkyLayout extends RelativeLayout {
 
     private static final int[] Clouds = { R.drawable.cloud1, R.drawable.cloud2, R.drawable.cloud3 };
 
-    private int mCol_daySky = 0, mCol_nightSky = 0;
-    private ArgbEvaluator mColEvaluator = new ArgbEvaluator();
-
     private View mSunView = null;
     private ImageView mMoonView = null;
     private ArrayList<ParallaxImageView> mCloudViews = new ArrayList<>();
 
     private ScrollView mScrollView = null;
     private OnScrollChangedListener mScrollListener = null;
+
+    private float mMaxScroll = 0;
+    private int mCol_daySky = 0, mCol_nightSky = 0;
+
+    private ArgbEvaluator mColEvaluator = new ArgbEvaluator();
+    private ObjectAnimator mScrollOscillator;
 
     public ParallaxSkyLayout(Context context) {
         super(context);
@@ -76,24 +83,50 @@ public class ParallaxSkyLayout extends RelativeLayout {
     }
     public void registerScrollView(ScrollView scrollView) {
         mScrollView = scrollView;
+        mScrollView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override public void onGlobalLayout() {
+                mScrollView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                mMaxScroll = mScrollView.getChildAt(0).getHeight() - mScrollView.getHeight();
+
+                Log.d(TAG, "GlobalLayoutListener :: MaxScroll=" + mMaxScroll);
+            }
+        });
         mScrollView.getViewTreeObserver().addOnScrollChangedListener(mScrollListener = new OnScrollChangedListener() {
 
-            float maxScrollY = 0, lastScrollY = -1;
+            float lastScrollY = -1;
 
             @Override public void onScrollChanged() {
                 if (lastScrollY == mScrollView.getScrollY()) return;
                 lastScrollY = mScrollView.getScrollY();
 
-                if (maxScrollY == 0) maxScrollY = mScrollView.getChildAt(0).getHeight() - mScrollView.getHeight();
+                float percentScrolledY = Math.min(lastScrollY / mMaxScroll, 1);
 
-                float percentScrolledY = Math.min(lastScrollY / maxScrollY, 1);
-
-                Log.d(TAG, String.format("onScrolled:: scrolledY=%f maxScrollY=%f", lastScrollY, maxScrollY));
+//                Log.d(TAG, String.format("onScrolled:: scrolledY=%f maxScrollY=%f", lastScrollY, mMaxScroll));
 
                 reactToScroll(percentScrolledY);
 
             }
         });
+    }
+
+    public void oscillateScroll() {
+        if (mScrollOscillator != null) return;
+
+        Log.d(TAG, "Oscillating Scroll : 0 to " + mMaxScroll);
+
+        mScrollOscillator = ObjectAnimator.ofInt(mScrollView, "scrollY", (int) mMaxScroll);
+        mScrollOscillator.setRepeatMode(ValueAnimator.REVERSE);
+        mScrollOscillator.setRepeatCount(ValueAnimator.INFINITE);
+        mScrollOscillator.setDuration(40000);
+        mScrollOscillator.start();
+    }
+    public void terminateOscillation() {
+        if (mScrollOscillator == null) return;
+
+        mScrollOscillator.cancel();
+        mScrollOscillator = null;
+
+        mScrollView.smoothScrollTo(0, 0);
     }
 
     private void showMoon(float percentScrolled) {

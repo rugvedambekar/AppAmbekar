@@ -3,34 +3,36 @@ package ra.appambekar.activities;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.view.Gravity;
 import android.view.Menu;
 import android.view.View;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.Toast;
 
-import java.util.Timer;
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import ra.appambekar.R;
 import ra.appambekar.adapters.MenuAdapter;
+import ra.appambekar.fragments.LoginFragment;
 import ra.appambekar.fragments.android.AndroidFragment;
 import ra.appambekar.fragments.apps.AppProfileFragment;
 import ra.appambekar.fragments.HomeFragment;
 import ra.appambekar.fragments.qualifications.QualificationsFragment;
 import ra.appambekar.fragments.apps.AppsPagerFragment;
+import ra.appambekar.helpers.FirebaseHelper;
 import ra.appambekar.models.MenuOption;
-import ra.appambekar.utilities.receivers.NetworkChangeReceiver;
+import ra.appambekar.models.events.LoginEvent;
+import ra.appambekar.models.events.NetworkEvent;
 
 import static com.balysv.materialmenu.MaterialMenuDrawable.*;
 
 
-public class MainActivity extends BaseToolbarActivity implements NetworkChangeReceiver.Responder {
+public class MainActivity extends BaseToolbarActivity {
 
     private DrawerLayout mMenuLayout;
     private MenuAdapter mMenuAdapter;
@@ -46,16 +48,10 @@ public class MainActivity extends BaseToolbarActivity implements NetworkChangeRe
         setContentView(R.layout.activity_main);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
-        NetworkChangeReceiver.RegisterResponder(this);
+        initializeBaseToolbar();
+        initializeApplication();
 
-        initializeToolbar();
-        initializeNavMenu();
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        NetworkChangeReceiver.RemoveAllResponders();
+        if (!FirebaseHelper.getInstance().isAuthenticated()) LoginFragment.ShowInstance(getSupportFragmentManager());
     }
 
     @Override
@@ -64,7 +60,38 @@ public class MainActivity extends BaseToolbarActivity implements NetworkChangeRe
         setHeader(R.string.main_header);
     }
 
-    private void initializeNavMenu() {
+    @Override
+    protected void onPause() {
+        super.onPause();
+        EventBus.getDefault().unregister(this);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        EventBus.getDefault().register(this);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        FirebaseHelper.getInstance().unAuthenticate();
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onLoggedIn(LoginEvent event) {
+        mMenuAdapter.refreshIfRequired();
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onHasNetwork(NetworkEvent event) {
+        mMenuAdapter.refreshIfRequired();
+    }
+
+    @Override
+    protected void initializeApplication() {
+        super.initializeApplication();
+
         mMenuLayout = (DrawerLayout) findViewById(R.id.dl_mainMenu);
         mNavMenuList = (ListView) findViewById(R.id.lv_mainMenu);
         mMenuAdapter = new MenuAdapter(this);
@@ -187,12 +214,4 @@ public class MainActivity extends BaseToolbarActivity implements NetworkChangeRe
         popContactFragment();
         getSupportFragmentManager().beginTransaction().replace(R.id.container_main, frag).commit();
     }
-
-    @Override
-    public void onNetworkAvailable() {
-        mMenuAdapter.refreshIfRequired();
-    }
-
-    @Override
-    public void onNetworkUnavailable() { }
 }

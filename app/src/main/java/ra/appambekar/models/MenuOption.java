@@ -11,7 +11,7 @@ public class MenuOption {
     private int mTitleID = -1;
     private String mTitle = "";
 
-    private boolean mNoConnection = false, mIsHeading = false;
+    private Type mOptionType = Type.Regular;
     private ArrayList<AppInfo> mAppInfoList = null;
 
     public MenuOption() { }
@@ -22,12 +22,8 @@ public class MenuOption {
         mTitle = title;
     }
 
-    public MenuOption forHeading() {
-        mIsHeading = true;
-        return this;
-    }
-    public MenuOption forNoConnection() {
-        mNoConnection = true;
+    public MenuOption ofType(Type type) {
+        mOptionType = type;
         return this;
     }
     public MenuOption withApp(AppInfo appInfo) {
@@ -44,7 +40,9 @@ public class MenuOption {
     public AppInfo getAppInfo() { return mAppInfoList == null ? null : mAppInfoList.get(0); }
     public int getAppCount() { return mAppInfoList == null ? 0 : mAppInfoList.size(); }
 
-    public boolean isHeading() { return mIsHeading; }
-    public boolean isNoConnection() { return mNoConnection; }
+    public Type getType() { return mOptionType; }
+    public boolean isHeading() { return mOptionType == Type.Heading; }
     public boolean isApp() { return mAppInfoList != null; }
+
+    public enum Type { Regular, Heading, NoConnection, NoAuthentication }
 }

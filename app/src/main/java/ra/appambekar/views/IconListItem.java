@@ -71,12 +71,13 @@ public class IconListItem extends LinearLayout {
     }
 
     public void setContent(int contentId) {
-        if (TextUtils.isEmpty(mTV_content.getText())) mTV_content.setText(contentId);
-        else mTV_content.switchText(getResources().getString(contentId));
+        mTV_content.setText(contentId);
     }
     public void setContent(String content) {
-        if (TextUtils.isEmpty(mTV_content.getText())) mTV_content.setText(content);
-        else mTV_content.switchText(content);
+        mTV_content.setText(content);
+    }
+    public void switchContent(String content) {
+        mTV_content.switchText(content);
     }
 
     public CharSequence getContent() { return mTV_content.getText(); }

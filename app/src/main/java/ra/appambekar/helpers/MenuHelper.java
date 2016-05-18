@@ -43,12 +43,12 @@ public class MenuHelper {
         mAllOptions.add(new MenuOption(R.string.m_home));
         mAllOptions.add(new MenuOption(R.string.m_qualifications));
         mAllOptions.add(new MenuOption(R.string.m_apps));
-        mAllOptions.add(new MenuOption(R.string.m_work).forHeading());
+        mAllOptions.add(new MenuOption(R.string.m_work).ofType(MenuOption.Type.Heading));
     }
 
     private void loadDynamicMenu(final MenuListener menuListener) {
         if (!(mHasDynamicMenu = AmbekarApplication.hasActiveConnection())) {
-            mAllOptions.add(new MenuOption().forNoConnection());
+            mAllOptions.add(new MenuOption().ofType(MenuOption.Type.NoConnection));
 
         } else FirebaseHelper.getInstance().getChildREF(FireChild.AppProjects).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -67,7 +67,12 @@ public class MenuHelper {
 
             @Override
             public void onCancelled(FirebaseError firebaseError) {
-                Log.e(TAG, firebaseError.toString());
+                if (firebaseError.getCode() == FirebaseError.PERMISSION_DENIED) {
+                    mHasDynamicMenu = false;
+                    mAllOptions.add(new MenuOption().ofType(MenuOption.Type.NoAuthentication));
+                    if (menuListener != null) menuListener.onFullMenuLoaded();
+                }
+                Log.e(TAG, firebaseError.toString() + " : " + firebaseError.getMessage());
             }
         });
     }
@@ -81,6 +86,7 @@ public class MenuHelper {
     public boolean hasDynamicMenu() { return mHasDynamicMenu; }
     public void loadMenu(MenuListener menuListener) {
         mAllOptions.clear();
+        mOtherWorkOption = null;
 
         loadStaticMenu();
         loadDynamicMenu(menuListener);

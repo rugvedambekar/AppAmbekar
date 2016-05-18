@@ -109,6 +109,9 @@ public class SmartTextView extends TextView {
         super.setTypeface(tf, style);
     }
 
+    public void switchText(int resId) {
+        switchText(getResources().getString(resId));
+    }
     public void switchText(final String newText) {
         animate().alpha(0).setDuration(150).withEndAction(new Runnable() {
             @Override public void run() {
@@ -166,7 +169,7 @@ public class SmartTextView extends TextView {
                         textHeights += mLineBounds.height() + ".";
                     } else {
                         if (lineNum == 1) {
-                            flushLine(canvas, lineNum, fullText);
+                            rawFlushLine(canvas, lineNum, fullText);
                             textHeights += mLineBounds.height() + ".";
                         }
                         else {

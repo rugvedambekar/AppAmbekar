@@ -12,6 +12,7 @@
         android:layout_height="32dp"
         android:layout_marginRight="10dp"
         android:padding="3dp"
+        android:scaleType="fitCenter"
         android:alpha="0.7"/>
 
     <ra.smarttextview.SmartTextView

@@ -2,10 +2,12 @@ package ra.appambekar.views;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.graphics.Color;
 import android.util.AttributeSet;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 
 import ra.appambekar.R;
 import ra.appambekar.models.content.Experience;
@@ -16,7 +18,7 @@ import ra.smarttextview.SmartTextView;
 public class HeaderListView extends RelativeLayout implements VerticalViewSwitcher.VVSView {
 
     private SmartTextView mTV_header, mTV_tag;
-    private LinearLayout mLL_content;
+    private ScrollView mScrollContainer;
 
     public HeaderListView(Context context, Experience exp) {
         super(context);
@@ -46,8 +48,12 @@ public class HeaderListView extends RelativeLayout implements VerticalViewSwitch
         mTV_tag.setText(tagId);
     }
     public void setList(int listId, int imgListId) {
-        mLL_content.removeAllViews();
+        mScrollContainer.removeAllViews();
 
+        LinearLayout innerLayout = new LinearLayout(getContext());
+        innerLayout.setOrientation(LinearLayout.VERTICAL);
+
+        int padding = (int) LayoutUtils.Convert.DpToPx(5, getContext());
         String[] contentList = getResources().getStringArray(listId);
         TypedArray imgList = imgListId > 0 ? getResources().obtainTypedArray(imgListId) : null;
 
@@ -56,16 +62,15 @@ public class HeaderListView extends RelativeLayout implements VerticalViewSwitch
             IconListItem itemView = new IconListItem(getContext());
             int imgResId = imgList == null ? -1 : imgList.getResourceId(i, -1);
 
-            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-            layoutParams.setMargins(0, 0, 0, (int) LayoutUtils.Convert.DpToPx(5, getContext()));
-
-            itemView.setLayoutParams(layoutParams);
+            itemView.setPadding(0, i == 0 ? padding : 0, 0, padding);
             itemView.setType(IconListItem.Type.Light);
             itemView.setContent(contentList[i]);
             itemView.setIcon(imgResId);
 
-            mLL_content.addView(itemView);
+            innerLayout.addView(itemView);
         }
+
+        mScrollContainer.addView(innerLayout);
     }
 
     private void init(AttributeSet attrs, int defStyle) {
@@ -74,7 +79,7 @@ public class HeaderListView extends RelativeLayout implements VerticalViewSwitch
         mTV_header = (SmartTextView) findViewById(R.id.tv_hlbHeader);
         mTV_tag = (SmartTextView) findViewById(R.id.tv_hlbTag);
 
-        mLL_content = (LinearLayout) findViewById(R.id.ll_hlbContent);
+        mScrollContainer = (ScrollView) findViewById(R.id.scrollContainer_list);
     }
 
     @Override

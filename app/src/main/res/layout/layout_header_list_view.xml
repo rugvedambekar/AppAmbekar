@@ -24,25 +24,13 @@
         android:layout_width="match_parent"
         android:layout_height="1dip"
         android:layout_marginTop="10dp"
-        android:layout_below="@id/tv_hlbTag"
+        android:layout_marginBottom="10dp"
         android:background="@android:color/darker_gray"/>
 
     <ScrollView
+        android:id="@+id/scrollContainer_list"
         android:layout_width="match_parent"
         android:layout_height="0dip"
-        android:paddingTop="10dp"
-        android:paddingBottom="10dp"
-        android:layout_weight="1">
-
-        <LinearLayout
-            android:id="@+id/ll_hlbContent"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:paddingLeft="10dp"
-            android:orientation="vertical"/>
-
-    </ScrollView>
-
+        android:layout_weight="1"/>
 
 </LinearLayout>

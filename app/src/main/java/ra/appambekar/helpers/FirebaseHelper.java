@@ -36,7 +36,7 @@ public class FirebaseHelper {
 
     private static FirebaseHelper mInstance = null;
 
-    private FirebaseHelper() { Firebase.setAndroidContext(AmbekarApplication.getAppContext()); }
+    private FirebaseHelper() { Firebase.setAndroidContext(AmbekarApplication.GetAppContext()); }
 
     private Firebase mRootRef = null;
 
@@ -50,7 +50,7 @@ public class FirebaseHelper {
             @Override
             public void onSuccess(Map<String, Object> result) {
                 SharedPrefsHelper.getInstance().storeAccountDetails(fullName, email, pass);
-                Toast.makeText(AmbekarApplication.getAppContext(), "You have been registered!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(AmbekarApplication.GetAppContext(), "You have been registered!", Toast.LENGTH_SHORT).show();
 
                 if (onAccountCreated != null) onAccountCreated.run();
             }

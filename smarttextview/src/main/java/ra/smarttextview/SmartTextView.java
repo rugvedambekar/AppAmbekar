@@ -41,7 +41,6 @@ public class SmartTextView extends TextView {
 
     private int mFirstLineTextHeight = 0;
     private Rect mLineBounds = new Rect();
-    private float mDrawableWidth = 0;
 
     public SmartTextView(Context context) {
         super(context);
@@ -182,11 +181,11 @@ public class SmartTextView extends TextView {
             }
         }
 
-//        Log.d(TAG, "onDraw :: viewMeasuredHeight=" + getMeasuredHeight() + " firstLineTextHeight=" + mFirstLineTextHeight + " textHeights=" + textHeights);
+//        Log.d(TAG, "onDraw :: viewMWidth=" + getMeasuredWidth() + " viewMHeight=" + getMeasuredHeight() + " firstLineHeight=" + mFirstLineTextHeight);
     }
 
     private float getDrawableWidth() {
-        return mDrawableWidth == 0 ? (mDrawableWidth = getWidth() - getPaddingLeft() - getPaddingRight()) : mDrawableWidth;
+        return getMeasuredWidth() - getPaddingLeft() - getPaddingRight();
     }
 
     private void setFirstLineTextHeight(String firstLine) {
@@ -232,6 +231,8 @@ public class SmartTextView extends TextView {
         float xStart = getPaddingLeft();
         float wordWidth = getPaint().measureText(word);
         float spacingWidth = (getDrawableWidth() - wordWidth) / (word.length() - 1);
+
+//        Log.d(TAG, "FLUSH WORD @ " + yLine + " :: drawableWidth=" + getDrawableWidth() + " wordWidth=" + wordWidth + " spacingWidth=" + spacingWidth);
 
         for (int i = 0; i < word.length(); i++) {
             canvas.drawText(word, i, i + 1, xStart, yLine, getPaint());

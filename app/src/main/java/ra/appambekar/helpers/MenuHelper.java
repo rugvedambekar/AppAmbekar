@@ -47,7 +47,7 @@ public class MenuHelper {
     }
 
     private void loadDynamicMenu(final MenuListener menuListener) {
-        if (!(mHasDynamicMenu = AmbekarApplication.hasActiveConnection())) {
+        if (!(mHasDynamicMenu = AmbekarApplication.HasActiveConnection())) {
             mAllOptions.add(new MenuOption().ofType(MenuOption.Type.NoConnection));
             if (menuListener != null) menuListener.onFullMenuLoaded();
 

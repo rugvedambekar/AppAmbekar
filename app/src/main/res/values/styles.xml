@@ -8,6 +8,20 @@
     <style name="FragmentSpacing">
         <item name="android:padding">20dp</item>
     </style>
+
+
+    <!--Buttons-->
+
+    <style name="LoginButton" parent="LoginButtonBase"/>
+
+    <style name="LoginButtonBase" parent="android:Widget.TextView">
+        <item name="android:background">@drawable/button_login</item>
+        <item name="android:padding">10dp</item>
+        <item name="android:textSize">10sp</item>
+        <item name="android:textColor">@color/text_med</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:gravity">center</item>
+    </style>
     
     <style name="AndroidListItem">
         <item name="android:layout_width">match_parent</item>

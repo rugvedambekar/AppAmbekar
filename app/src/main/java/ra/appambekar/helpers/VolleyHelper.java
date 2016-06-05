@@ -20,7 +20,7 @@ public class VolleyHelper {
     private ImageLoader mImageLoader;
 
     private VolleyHelper() {
-        mRequestQueue = Volley.newRequestQueue(AmbekarApplication.getAppContext());
+        mRequestQueue = Volley.newRequestQueue(AmbekarApplication.GetAppContext());
         mImageLoader = new ImageLoader(this.mRequestQueue, new ImageLoader.ImageCache() {
             private final LruCache<String, Bitmap> mCache = new LruCache<>(10);
 

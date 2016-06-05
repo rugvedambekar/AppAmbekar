@@ -7,6 +7,7 @@ import android.content.res.AssetManager;
 import android.graphics.Typeface;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.Build;
 
 import ra.appambekar.helpers.ImageCloudHelper;
 import ra.appambekar.helpers.FirebaseHelper;
@@ -36,11 +37,11 @@ public class AmbekarApplication extends Application {
         ImageCloudHelper.getInstance();
     }
 
-    public static Context getAppContext() {
+    public static Context GetAppContext() {
         return mApplicationContext;
     }
 
-    public static boolean hasActiveConnection() {
+    public static boolean HasActiveConnection() {
         if (mApplicationContext == null) return false;
 
         ConnectivityManager conMgr = (ConnectivityManager) mApplicationContext.getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -48,4 +49,6 @@ public class AmbekarApplication extends Application {
 
         return activeNetwork != null && activeNetwork.isConnected();
     }
+    
+    public static boolean IsOver21() { return Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP; }
 }

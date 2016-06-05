@@ -113,8 +113,11 @@ public class LoginFragment extends DialogFragment {
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onLoggedIn(LoginEvent event) {
-        if (event.loginSuccess) dismiss();
-        else Toast.makeText(getActivity(), event.failureMsg, Toast.LENGTH_SHORT).show();
+        if (!event.loginSuccess) {
+            LayoutUtils.View.SetAsButton(mLogin, mOnLoginClick);
+            Toast.makeText(getActivity(), event.failureMsg, Toast.LENGTH_LONG).show();
+
+        } else dismiss();
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
@@ -159,7 +162,7 @@ public class LoginFragment extends DialogFragment {
         mEmail.setHint(R.string.l_email_hint_login);
         mPass.setHint(R.string.l_pass_hint_login);
 
-        if (AmbekarApplication.hasActiveConnection()) {
+        if (AmbekarApplication.HasActiveConnection()) {
             mEmail.setText(SharedPrefsHelper.getInstance().getUserInfo(UserInfo.Email));
             mPass.setText(SharedPrefsHelper.getInstance().getUserInfo(UserInfo.Password));
         }
@@ -177,7 +180,7 @@ public class LoginFragment extends DialogFragment {
     }
 
     private void setAccessControl() {
-        boolean mHasConnection = AmbekarApplication.hasActiveConnection();
+        boolean mHasConnection = AmbekarApplication.HasActiveConnection();
         mContentContainer.setAlpha(mHasConnection ? 1 : ALPHA_OFF);
         for (int childIndex = 0; childIndex < ((ViewGroup) mContentContainer).getChildCount(); childIndex++) {
             View child = ((ViewGroup) mContentContainer).getChildAt(childIndex);

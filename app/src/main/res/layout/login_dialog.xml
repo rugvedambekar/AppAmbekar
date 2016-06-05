@@ -4,7 +4,9 @@
     android:id="@+id/container_loginDialog"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:clipToPadding="false"
+    android:clipChildren="false">
 
     <ra.smarttextview.SmartTextView
         android:id="@+id/tv_loginHeader"
@@ -89,6 +91,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        android:clipToPadding="false"
+        android:clipChildren="false"
         android:layout_margin="25dp">
 
         <LinearLayout
@@ -103,27 +107,17 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
-                android:background="@drawable/rounded_button_login"
-                android:gravity="center"
-                android:padding="10dp"
-                android:textSize="10sp"
-                android:textAllCaps="true"
-                android:textColor="@color/text_med"
                 android:text="@string/l_heading_register"
-                app:font="thick"/>
+                app:font="thick"
+                style="@style/LoginButton"/>
 
             <ra.smarttextview.SmartTextView
                 android:id="@+id/tv_guest"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/rounded_button_login"
-                android:gravity="center"
-                android:padding="10dp"
-                android:textSize="10sp"
-                android:textAllCaps="true"
-                android:textColor="@color/text_med"
                 android:text="@string/l_heading_guest"
-                app:font="thick"/>
+                app:font="thick"
+                style="@style/LoginButton"/>
 
         </LinearLayout>
 
@@ -133,14 +127,9 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:layout_marginStart="5dp"
-            android:background="@drawable/rounded_button_login"
-            android:gravity="center"
-            android:padding="10dp"
-            android:textSize="10sp"
-            android:textAllCaps="true"
-            android:textColor="@color/text_med"
             android:text="@string/l_heading_login"
-            app:font="thick"/>
+            app:font="thick"
+            style="@style/LoginButton"/>
 
     </LinearLayout>
 

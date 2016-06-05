@@ -7,103 +7,78 @@
     android:layout_height="match_parent"
     android:clickable="true">
 
-    <ra.appambekar.views.FadeInNetworkImageView
-        android:id="@+id/niv_profilePic"
+    <LinearLayout
+        android:id="@+id/ll_contact"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scaleType="centerCrop"/>
+        android:orientation="vertical">
 
-    <ra.smarttextview.SmartTextView
-        android:id="@+id/tv_thanks"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:gravity="center_horizontal"
-        android:layout_centerHorizontal="true"
-        android:padding="20dp"
-        android:text="@string/c_thanks"
-        android:textSize="44sp"
-        android:textColor="@color/text_light"
-        app:font="thick"/>
-
-    <ScrollView
-        android:id="@+id/scrollContainer_contact"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <LinearLayout
-            android:id="@+id/ll_contact"
+        <ra.appambekar.views.IntroductionLayout
+            android:id="@+id/il_contact"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:padding="25dp"
+            app:introHeading="@string/c_heading"
+            app:intro="@string/c_sub_heading"/>
 
-            <ra.appambekar.views.IntroductionLayout
-                android:id="@+id/il_contact"
-                android:layout_width="match_parent"
+        <LinearLayout
+            android:id="@+id/ll_contactInfoList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingRight="25dp"
+            android:paddingLeft="25dp"
+            android:paddingBottom="25dp">
+
+            <ra.appambekar.views.IconListItem
+                android:id="@+id/ili_location"
                 android:layout_height="wrap_content"
-                android:background="@color/background_light_faded"
-                android:padding="25dp"
-                app:introHeading="@string/c_heading"
-                app:intro="@string/c_sub_heading"/>
+                android:layout_width="wrap_content"
+                android:layout_marginBottom="10dp"
+                app:iconSrc="@drawable/ic_my_location"
+                app:itemType="light"/>
 
-            <LinearLayout
-                android:id="@+id/ll_contactInfoList"
-                android:layout_width="match_parent"
+            <ra.appambekar.views.IconListItem
+                android:id="@+id/ili_email"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:paddingRight="25dp"
-                android:paddingLeft="25dp"
-                android:paddingBottom="25dp"
-                android:background="@color/background_light_faded">
+                android:layout_width="wrap_content"
+                android:layout_marginBottom="10dp"
+                app:iconSrc="@drawable/ic_email"
+                app:itemType="light"/>
 
-                <ra.appambekar.views.IconListItem
-                    android:id="@+id/ili_location"
-                    android:layout_height="wrap_content"
-                    android:layout_width="wrap_content"
-                    android:layout_marginBottom="10dp"
-                    app:iconSrc="@drawable/ic_my_location"
-                    app:itemType="light"/>
-
-                <ra.appambekar.views.IconListItem
-                    android:id="@+id/ili_email"
-                    android:layout_height="wrap_content"
-                    android:layout_width="wrap_content"
-                    android:layout_marginBottom="10dp"
-                    app:iconSrc="@drawable/ic_email"
-                    app:itemType="light"/>
-
-                <ra.appambekar.views.IconListItem
-                    android:id="@+id/ili_phone"
-                    android:layout_height="wrap_content"
-                    android:layout_width="wrap_content"
-                    app:iconSrc="@drawable/ic_phone"
-                    app:itemType="light"/>
-
-            </LinearLayout>
-
-            <FrameLayout
-                android:layout_width="match_parent"
+            <ra.appambekar.views.IconListItem
+                android:id="@+id/ili_phone"
                 android:layout_height="wrap_content"
-                android:background="@color/background_light_faded">
-
-                <ra.appambekar.views.ErrorItemView
-                    android:id="@+id/eiv_contact"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingStart="50dp"
-                    android:paddingEnd="50dp"
-                    android:visibility="gone"/>
-
-            </FrameLayout>
-
-            <View
-                android:id="@+id/fl_picFrame"
-                android:layout_width="match_parent"
-                android:layout_height="0dip"
-                android:background="@color/background_light_faded"/>
+                android:layout_width="wrap_content"
+                app:iconSrc="@drawable/ic_phone"
+                app:itemType="light"/>
 
         </LinearLayout>
 
-    </ScrollView>
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dip"
+            android:layout_weight="1">
+
+            <ra.appambekar.views.ErrorItemView
+                android:id="@+id/eiv_contact"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="50dp"
+                android:paddingEnd="50dp"
+                android:visibility="gone"/>
+
+            <ImageView
+                android:id="@+id/iv_contactPic"
+                android:layout_width="150dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:scaleType="centerInside"
+                android:src="@drawable/pic_contact"
+                android:alpha="0"/>
+
+        </FrameLayout>
+
+    </LinearLayout>
 
 </RelativeLayout>
